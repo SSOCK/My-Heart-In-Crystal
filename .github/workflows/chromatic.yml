@@ -1,0 +1,27 @@
+# Workflow name
+name: 'Chromatic Deployment'
+
+# Event for the workflow
+on:
+  push:
+    branches: [main]
+
+# List of jobs
+jobs:
+  test:
+    # Operating System
+    runs-on: ubuntu-latest
+    # Job steps
+    steps:
+      - name: Check if repository is snowball-deploy
+        run: |
+          if [ "${{ github.repository }}" != "kcwww/snowball-deploy" ]; then
+            echo "Repository is not snowball-deploy. Exiting workflow."
+            exit 0
+          fi
+      - uses: actions/checkout@v1
+      - run: yarn
+      - uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
