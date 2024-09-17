@@ -1,5 +1,11 @@
+import SnowGlobeCanvas from '@/shared/components/canvas/SnowGlobeCanvas';
+
 const Home = () => {
-  return <>SBIM START</>;
+  return (
+    <>
+      <SnowGlobeCanvas />
+    </>
+  );
 };
 
 export default Home;
