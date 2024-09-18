@@ -6,8 +6,21 @@ import { OrbitControls } from '@react-three/drei';
 
 const SnowGlobeCanvas = () => {
   return (
-    <section style={{ width: '100%', height: '100dvh' }}>
-      <Canvas flat linear camera={{ position: [20, 2, 0], fov: 100 }}>
+    <section
+      style={{
+        width: '100%',
+        height: '100dvh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+      }}
+    >
+      <Canvas
+        flat
+        linear
+        shadows={true}
+        camera={{ position: [20, 2, 0], fov: 100 }}
+      >
         <OrbitControls target={[0, 0, 0]} enablePan={false} />
         <ambientLight intensity={1} color={'#ffffff'} />
         <directionalLight
