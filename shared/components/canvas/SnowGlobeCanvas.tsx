@@ -1,8 +1,13 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import Bottom from '../3dModels/Bottom';
+import Bottom from '@/shared/components/3dModels/Bottom';
 import { OrbitControls } from '@react-three/drei';
+import Base from './Base';
+import MainDecoration from './MainDecoration';
+import Glass from './Glass';
+import Decorations from './Decorations';
+import Snowflake from './Snowflake';
 
 const SnowGlobeCanvas = () => {
   return (
@@ -29,6 +34,13 @@ const SnowGlobeCanvas = () => {
           color={'#ffffff'}
           castShadow
         />
+        <Glass />
+        {Array.from({ length: 100 }, (_, i) => (
+          <Snowflake key={i} />
+        ))}
+        <Decorations />
+        <MainDecoration />
+        <Base />
         <Bottom />
       </Canvas>
     </section>
