@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/nextjs';
-import path from 'path';
 
 const config: StorybookConfig = {
   stories: [
@@ -13,6 +12,7 @@ const config: StorybookConfig = {
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
     '@storybook/addon-themes',
+    '@storybook/addon-viewport',
   ],
   framework: {
     name: '@storybook/nextjs',

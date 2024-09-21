@@ -12,7 +12,12 @@ import {
 const TestModal = () => {
   return (
     <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
+      <DialogTrigger
+        style={{ pointerEvents: 'auto' }}
+        className="text-yellow-300"
+      >
+        Open
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>

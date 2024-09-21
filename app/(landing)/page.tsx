@@ -1,12 +1,15 @@
 import SnowGlobeCanvas from '@/shared/components/canvas/SnowGlobeCanvas';
+import UISection from '@/shared/components/ui/UISection';
+import Header from './_components/header';
 import TestModal from '@/shared/components/modals/testModal';
 
 const Home = () => {
   return (
     <>
-      <div style={{ zIndex: 1, position: 'relative' }}>
+      <UISection>
+        <Header />
         <TestModal />
-      </div>
+      </UISection>
       <SnowGlobeCanvas />
     </>
   );
