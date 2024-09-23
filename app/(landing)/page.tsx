@@ -1,14 +1,14 @@
 import SnowGlobeCanvas from '@/shared/components/canvas/SnowGlobeCanvas';
 import UISection from '@/shared/components/ui/UISection';
-import Header from './_components/header';
-import TestModal from '@/shared/components/modals/testModal';
+import Header from '@/app/(landing)/_components/Header';
+import IntroButtonSection from '@/app/(landing)/_components/IntroButtonSection';
 
 const Home = () => {
   return (
     <>
       <UISection>
         <Header />
-        <TestModal />
+        <IntroButtonSection />
       </UISection>
       <SnowGlobeCanvas />
     </>
