@@ -1,23 +1,26 @@
 'use client';
 
+import useModal from '@/shared/hooks/useModal';
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogFooter,
 } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
-const TestModal = () => {
+const IntroduceModal = () => {
+  const { isOpen, onClose } = useModal();
+
+  if (!isOpen) {
+    return null;
+  }
+
   return (
-    <Dialog>
-      <DialogTrigger
-        style={{ pointerEvents: 'auto' }}
-        className="text-yellow-300"
-      >
-        Open
-      </DialogTrigger>
+    <Dialog open={isOpen}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
@@ -26,9 +29,12 @@ const TestModal = () => {
             account and remove your data from our servers.
           </DialogDescription>
         </DialogHeader>
+        <DialogFooter>
+          <Button onClick={() => onClose()}>Cancel</Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 };
 
-export default TestModal;
+export default IntroduceModal;
