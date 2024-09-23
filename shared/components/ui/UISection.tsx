@@ -1,3 +1,5 @@
+import ModalProvider from '@/shared/provider/ModalProvider';
+
 const UISection = ({ children }: { children: React.ReactNode }) => {
   return (
     <section
@@ -16,6 +18,7 @@ const UISection = ({ children }: { children: React.ReactNode }) => {
       }}
     >
       {children}
+      <ModalProvider />
     </section>
   );
 };

@@ -1,7 +1,16 @@
-import TestModal from '@/shared/components/modals/testModal';
+'use client';
+
+import { Button } from '@/components/ui/button';
+import useModal from '@/shared/hooks/useModal';
 
 const IntroButtonSection = () => {
-  return <TestModal />;
+  const { onOpen } = useModal();
+
+  return (
+    <Button className="pointer-events-auto" onClick={() => onOpen('Intro')}>
+      Get Started
+    </Button>
+  );
 };
 
 export default IntroButtonSection;
