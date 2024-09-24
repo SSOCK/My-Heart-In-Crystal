@@ -146,7 +146,7 @@ const Decoration = ({
       child.userData.color = color;
       child.userData.letterColor = MSG_COLOR[letterID].color;
       child.userData.messageID = messageID;
-      child.castShadow = true;
+      child.castShadow = false;
       if (child.name === 'Main') {
         child.material = makeColorChangedMaterial(child, color);
       }

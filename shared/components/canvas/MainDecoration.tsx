@@ -61,7 +61,7 @@ const MainDecoration = () => {
   deco.name = 'MainDeco';
   deco.scale.set(1, 1, 1);
   deco.position.set(0, 10, 0);
-  deco.children.forEach((mesh) => (mesh.castShadow = true));
+  deco.children.forEach((mesh) => (mesh.castShadow = false));
 
   useFrame((_, delta) => {
     if (delta > 1) {

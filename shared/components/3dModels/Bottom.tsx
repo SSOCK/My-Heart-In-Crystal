@@ -68,6 +68,8 @@ const Bottom = () => {
 
   bottom.scale.set(1, 1, 1);
   bottom.position.set(0, 0, 0);
+  bottom.receiveShadow = true;
+  bottom.castShadow = true;
   return <primitive object={bottom} />;
 };
 
