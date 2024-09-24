@@ -8,6 +8,7 @@ import MainDecoration from './MainDecoration';
 import Glass from './Glass';
 import Decorations from './Decorations';
 import Snowflake from './Snowflake';
+import Ground from './Ground';
 
 const SnowGlobeCanvas = () => {
   return (
@@ -29,10 +30,18 @@ const SnowGlobeCanvas = () => {
         <OrbitControls target={[0, 0, 0]} enablePan={false} />
         <ambientLight intensity={1} color={'#ffffff'} />
         <directionalLight
-          position={[10, 10, 10]}
+          position={[10, 20, 10]}
           intensity={2}
           color={'#ffffff'}
-          castShadow
+          castShadow={true}
+          shadow-mapSize-width={2048} // shadow resolution
+          shadow-mapSize-height={2048}
+          shadow-camera-far={50} // default is 50
+          shadow-camera-near={1}
+          shadow-camera-left={-15}
+          shadow-camera-right={15}
+          shadow-camera-top={15}
+          shadow-camera-bottom={-15}
         />
         <Glass />
         {Array.from({ length: 100 }, (_, i) => (
@@ -42,6 +51,7 @@ const SnowGlobeCanvas = () => {
         <MainDecoration />
         <Base />
         <Bottom />
+        <Ground />
       </Canvas>
     </section>
   );

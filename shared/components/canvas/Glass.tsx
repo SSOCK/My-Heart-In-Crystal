@@ -1,3 +1,4 @@
+import { Sphere } from '@react-three/drei';
 import { Color, Vector3 } from 'three';
 
 const Glass = () => {
@@ -6,8 +7,12 @@ const Glass = () => {
   const position = new Vector3(0, radius / 2, 0);
 
   return (
-    <mesh position={position} name={'glass'}>
-      <sphereGeometry args={[radius, 36, 32]} />
+    <Sphere
+      args={[radius, 36, 32]}
+      position={position}
+      castShadow={true}
+      receiveShadow={true}
+    >
       <meshStandardMaterial
         transparent={true}
         color={color}
@@ -15,7 +20,7 @@ const Glass = () => {
         roughness={0}
         metalness={1}
       />
-    </mesh>
+    </Sphere>
   );
 };
 
