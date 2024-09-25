@@ -25,9 +25,14 @@ const SnowGlobeCanvas = () => {
         flat
         linear
         shadows={true}
-        camera={{ position: [20, 2, 0], fov: 100 }}
+        camera={{ position: [16, 0, 0], fov: 100 }}
       >
-        <OrbitControls target={[0, 0, 0]} enablePan={false} />
+        <OrbitControls
+          target={[0, 0, 0]}
+          enablePan={false}
+          enableZoom={false}
+          maxPolarAngle={(Math.PI / 9) * 5}
+        />
         <ambientLight intensity={1} color={'#ffffff'} />
         <directionalLight
           position={[10, 20, 10]}
