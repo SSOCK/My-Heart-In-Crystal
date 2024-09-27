@@ -69,11 +69,17 @@ const Raycaster = () => {
       );
 
       if (selectedDeco) {
-        const { message, sender, letterColor, messageID } =
+        const { message, sender, letterColor, messageID, sendAt } =
           selectedDeco.object.userData;
 
         onOpen('Message', {
-          data: { message, sender, letterColor, messageID } as MessageType,
+          data: {
+            message,
+            sender,
+            letterColor,
+            messageID,
+            sendAt,
+          } as MessageType,
         });
       }
     };

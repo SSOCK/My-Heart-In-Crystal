@@ -121,7 +121,6 @@ const DecoSet = (deco: Group<Object3DEventMap>) => {
 export type MessageType = {
   message: string;
   sender: string;
-  color: string;
   letterColor: string;
   messageID: number;
   sendAt: string;
@@ -154,7 +153,6 @@ const Decoration = ({
     if (child instanceof Mesh) {
       child.userData.message = message;
       child.userData.sender = sender;
-      child.userData.color = color;
       child.userData.letterColor = MSG_COLOR[letterID].color;
       child.userData.messageID = messageID;
       child.userData.sendAt = sendAt;
