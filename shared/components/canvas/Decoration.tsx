@@ -117,6 +117,14 @@ const DecoSet = (deco: Group<Object3DEventMap>) => {
   deco.add(newModel);
 };
 
+export type MessageType = {
+  message: string;
+  sender: string;
+  color: string;
+  letterColor: string;
+  messageID: number;
+};
+
 const Decoration = ({
   scale,
   position,
