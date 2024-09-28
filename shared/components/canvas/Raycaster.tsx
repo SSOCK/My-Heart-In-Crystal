@@ -5,7 +5,7 @@ import { useThree, useFrame } from '@react-three/fiber';
 import usePrev from '@/shared/hooks/usePrev';
 import useModal from '@/shared/hooks/useModal';
 
-import { MessageType } from './Decoration';
+import { MessageType } from '../3dModels/Decoration';
 
 const Raycaster = () => {
   const { camera, pointer, raycaster, scene, gl } = useThree();
