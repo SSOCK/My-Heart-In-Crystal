@@ -9,17 +9,22 @@ import usePrev from '@/shared/hooks/usePrev';
 const PreviousButton = () => {
   const { view, onOut } = usePrev();
 
+  // 페이지 이동 시 이전 페이지 상태 초기화
   useEffect(() => {
     return () => {
-      onOut(view);
+      onOut();
     };
-  }, [view]);
+  }, []);
 
   if (!view) return null;
 
+  console.log('PreviousButton');
+
   return (
     <Button
-      onClick={() => onOut(view)}
+      onClick={() => {
+        view && onOut();
+      }}
       className="pointer-events-auto fixed flex h-12 w-12 items-center justify-center rounded-full bg-transparent p-2"
       style={{ zIndex: 1, top: '2rem', left: '2rem' }}
     >
