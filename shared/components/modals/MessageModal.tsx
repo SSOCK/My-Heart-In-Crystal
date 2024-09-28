@@ -10,11 +10,12 @@ import {
   DialogClose,
 } from '@/shared/components/ui/dialog';
 import useModal from '@/shared/hooks/useModal';
+import MODAL_TYPE from '@/shared/constants/modal';
 
 const MessageModal = () => {
   const { isOpen, onClose, type, props } = useModal();
 
-  if (!isOpen || type !== 'Message') {
+  if (!isOpen || type !== MODAL_TYPE.MESSAGE) {
     return null;
   }
   const { data } = props;
