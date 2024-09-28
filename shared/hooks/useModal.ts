@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { MessageType } from '@/shared/components/canvas/Decoration';
+import { MessageType } from '@/shared/components/3dModels/Decoration';
 
 export type ModalType = 'Intro' | 'Guest' | 'Message';
 

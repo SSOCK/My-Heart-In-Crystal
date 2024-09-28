@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
-} from '@/components/ui/dialog';
+} from '@/shared/components/ui/dialog';
 import useModal from '@/shared/hooks/useModal';
 
 const MessageModal = () => {

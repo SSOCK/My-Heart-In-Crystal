@@ -1,7 +1,7 @@
 import { Vector3 } from 'three';
 
-import Emoji from '@/shared/components/canvas/Emoji';
-import Decoration from '@/shared/components/canvas/Decoration';
+import Emoji from '@/shared/components/3dModels/Emoji';
+import Decoration from '@/shared/components/3dModels/Decoration';
 import { messageLists, Message } from './dummy';
 
 const getDecoPosition = (n: number): Vector3 => {
