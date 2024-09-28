@@ -3,29 +3,25 @@ import { create } from 'zustand';
 interface PrevStore {
   view: boolean;
   isZoom: boolean;
-  onIn: (isView: boolean) => void;
-  onOut: (isView: boolean) => void;
-  onZoom: (isZoom: boolean) => void;
-  onZoomOut: (isZoom: boolean) => void;
+  onIn: () => void;
+  onOut: () => void;
+  onZoom: () => void;
+  onZoomOut: () => void;
 }
 
 const usePrev = create<PrevStore>((set) => ({
   view: false,
   isZoom: false,
-  onIn: (isView) => {
-    if (isView) return;
+  onIn: () => {
     set({ view: true });
   },
-  onOut: (isView) => {
-    if (!isView) return;
+  onOut: () => {
     set({ view: false });
   },
-  onZoom: (isZoom) => {
-    if (isZoom) return;
+  onZoom: () => {
     set({ isZoom: true });
   },
-  onZoomOut: (isZoom) => {
-    if (!isZoom) return;
+  onZoomOut: () => {
     set({ isZoom: false });
   },
 }));
