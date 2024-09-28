@@ -18,8 +18,6 @@ const PreviousButton = () => {
 
   if (!view) return null;
 
-  console.log('PreviousButton');
-
   return (
     <Button
       onClick={() => {
