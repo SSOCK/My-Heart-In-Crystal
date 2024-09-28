@@ -22,7 +22,7 @@ const Raycaster = () => {
 
     if (isAnimating.current) {
       if (isClicked && !isZoom) {
-        onIn();
+        onIn(view);
         const targetPosition = new Vector3(0, -1, 0);
         camera.position.distanceTo(targetPosition) > 6
           ? camera.position.lerp(targetPosition, delta * 2)
@@ -40,7 +40,7 @@ const Raycaster = () => {
           camera.position.z *= zoomOutSpeed;
           // camera.position.lerp(new Vector3(0, 1, 0), delta * 2);
         } else {
-          onZoomOut();
+          onZoomOut(isZoom);
         }
       }
     }
