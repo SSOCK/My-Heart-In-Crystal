@@ -1,26 +1,22 @@
-import { MongoClient, ServerApiVersion } from 'mongodb';
-const uri = process.env.MONGODB_URI;
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri || '', {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
+import mongoose, { Connection } from 'mongoose';
 
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db('admin').command({ ping: 1 });
-    console.log(
-      'Pinged your deployment. You successfully connected to MongoDB!'
-    );
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
+let cachedConnection: Connection | null = null;
+
+export const connectToMongoDB = async () => {
+  if (cachedConnection) {
+    console.log('Using cached database connection');
+    return cachedConnection;
   }
-}
-run().catch(console.dir);
+
+  try {
+    if (!process.env.MONGODB_URL) throw new Error('MONGODB_URI is not set');
+
+    const cnx = await mongoose.connect(process.env.MONGODB_URL);
+    console.log('Database connected');
+    cachedConnection = cnx.connection;
+    return cachedConnection;
+  } catch (error) {
+    console.error('Error connecting to database', error);
+    throw error;
+  }
+};
