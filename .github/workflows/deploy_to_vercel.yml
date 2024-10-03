@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     container: pandoc/latex
     steps:
-      - name: Check if repository is snowball-deploy
+      - name: Check if repository is crystalball-deploy
         run: |
-          if [ "${{ github.repository }}" == "kcwww/snowball-deploy" ]; then
-            echo "Repository is snowball-deploy. Exiting workflow."
+          if [ "${{ github.repository }}" == "kcwww/crystalball-deploy" ]; then
+            echo "Repository is crystalball-deploy. Exiting workflow."
             exit 0
           fi
       - uses: actions/checkout@v2
