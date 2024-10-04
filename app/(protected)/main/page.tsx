@@ -8,6 +8,7 @@ import UserHeader from '@/shared/components/ui/UserHeader';
 import MessageCount from '@/shared/components/ui/MessageCount';
 
 import ShareLink from './_components/ui/ShareLink';
+import FullScreen from './_components/ui/FullScreen';
 
 const MainPage = () => {
   return (
@@ -18,7 +19,8 @@ const MainPage = () => {
           <UserHeader user="김부캠" />
           <MessageCount count={10} />
         </div>
-        <div>
+        <div className="flex w-full justify-between">
+          <FullScreen />
           <ShareLink userId="1234" />
         </div>
       </UISection>

@@ -25,7 +25,7 @@ const ShareLink = ({ userId }: { userId: string }) => {
     <Share
       className="pointer-events-auto cursor-pointer hover:text-blue-500"
       onClick={() => share()}
-      size={24}
+      size={'2rem'}
     />
   );
 };
