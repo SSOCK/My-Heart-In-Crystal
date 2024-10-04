@@ -9,11 +9,13 @@ import MessageCount from '@/shared/components/ui/MessageCount';
 
 import ShareLink from './_components/ui/ShareLink';
 import FullScreen from './_components/ui/FullScreen';
+import HamburgerButton from './_components/ui/HamburgerButton';
 
 const MainPage = () => {
   return (
     <>
       <PreviousButton />
+      <HamburgerButton />
       <UISection>
         <div className="flex flex-col items-center gap-2">
           <UserHeader user="김부캠" />
