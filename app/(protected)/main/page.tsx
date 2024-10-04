@@ -7,6 +7,8 @@ import PreviousButton from '@/shared/components/ui/PreviousButton';
 import UserHeader from '@/shared/components/ui/UserHeader';
 import MessageCount from '@/shared/components/ui/MessageCount';
 
+import ShareLink from './_components/ui/ShareLink';
+
 const MainPage = () => {
   return (
     <>
@@ -15,6 +17,9 @@ const MainPage = () => {
         <div className="flex flex-col items-center gap-2">
           <UserHeader user="김부캠" />
           <MessageCount count={10} />
+        </div>
+        <div>
+          <ShareLink userId="1234" />
         </div>
       </UISection>
       <CrystalCanvas />
