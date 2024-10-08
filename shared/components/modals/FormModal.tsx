@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import MODAL_TYPE from '@/shared/constants/modal';
+import UserForm from '@/app/(protected)/main/_components/ui/UserForm';
 
 const FormModal = () => {
   const { isOpen, onClose, type } = useModal();
@@ -28,9 +29,9 @@ const FormModal = () => {
       >
         <DialogHeader className="flex flex-col items-center justify-center">
           <DialogTitle>내 정보</DialogTitle>
-          <DialogDescription></DialogDescription>
+          <DialogDescription>내 정보를 수정할 수 있습니다.</DialogDescription>
         </DialogHeader>
-
+        <UserForm />
         <DialogFooter>
           <Button className="w-full" onClick={() => onClose()}>
             Close
