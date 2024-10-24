@@ -6,49 +6,47 @@ import React, { useEffect, useState } from 'react';
 import MakeCanvas from '@/app/(protected)/make/_components/MakeCanvas';
 import UISection from '@/shared/components/ui/UISection';
 
+import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import PreviousButton from '@/shared/components/ui/PreviousButton';
-
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
+import DecoDrawer from '@/app/(protected)/make/_components/DecoDrawer';
 
 const MakePage = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const maxStep = 6;
 
   const stepParam = searchParams.get('step');
   const [step, setStep] = useState(stepParam ? parseInt(stepParam) : 1);
 
-  const isDecorated = sessionStorage.getItem('isDecorated');
-  if (isDecorated) {
-    router.replace('/main');
-  }
-
   useEffect(() => {
+    setIsMounted(true);
+
+    const isDecorated = sessionStorage.getItem('isDecorated');
+    if (isDecorated) {
+      router.replace('/main');
+      return;
+    }
+
     const stepParam = searchParams.get('step');
     const step = stepParam ? parseInt(stepParam) : 1;
 
-    if (step === 4) {
+    if (step === maxStep) {
       router.replace('/main');
       sessionStorage.setItem('isDecorated', 'true');
       return;
     }
 
-    if (isNaN(step) || step < 1 || step > 4) {
+    if (isNaN(step) || step < 1 || step > maxStep) {
       router.replace('/make?step=1');
       return;
     }
 
     setStep(step);
   }, [searchParams, router]);
+
+  if (!isMounted) return null;
 
   const handleNext = () => {
     const nextStep = step + 1;
@@ -60,39 +58,29 @@ const MakePage = () => {
     <>
       <PreviousButton />
       <UISection>
-        <div className="bg-gray-300">
-          <h1>나만의 장식 만들기</h1>
-          <p>우측 사이드바를 통해 장식을 변경해보세요. {step}</p>
+        <div className="space-y-10 bg-gray-300 text-center">
+          <div>
+            <h1>새로운 수정 구슬 만들기</h1>
+            <p>
+              수정구슬은 소중한 마음을 주고 받는 예쁜 선물 상자가 될 거예요.
+            </p>
+          </div>
+          <Progress value={step * 20} />
         </div>
         <div className="flex w-full flex-col items-center justify-center gap-12">
-          <Drawer>
-            <DrawerTrigger className="pointer-events-auto">
-              장식 바꾸기
-            </DrawerTrigger>
-            <DrawerContent className="flex flex-col items-center justify-center">
-              <DrawerHeader className="flex flex-col items-center">
-                <DrawerTitle>장식을 선택해 주세요.</DrawerTitle>
-                <DrawerDescription>
-                  선택한 장식은 수정구슬에 선물되어요.
-                </DrawerDescription>
-              </DrawerHeader>
-
-              <DrawerFooter>
-                {/* <Button>Submit</Button> */}
-                <DrawerClose>
-                  <Button variant="outline">Cancel</Button>
-                </DrawerClose>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
+          <DecoDrawer step={step} />
 
           <div className="flex w-full justify-between md:w-1/2">
-            <Button
-              onClick={() => router.back()}
-              className="pointer-events-auto bg-gray-700"
-            >
-              이전
-            </Button>
+            {step > 1 ? (
+              <Button
+                onClick={() => router.back()}
+                className="pointer-events-auto bg-gray-700"
+              >
+                이전
+              </Button>
+            ) : (
+              <div />
+            )}
             <Button
               onClick={() => handleNext()}
               className="pointer-events-auto bg-gray-700"
