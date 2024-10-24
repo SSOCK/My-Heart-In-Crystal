@@ -17,11 +17,12 @@ const MakePage = () => {
   const searchParams = useSearchParams();
   const maxStep = 6;
 
-  const stepParam = searchParams.get('step');
-  const [step, setStep] = useState(stepParam ? parseInt(stepParam) : 1);
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     setIsMounted(true);
+    const stepParam = searchParams.get('step');
+    setStep(stepParam ? parseInt(stepParam) : 1);
   }, []);
 
   useEffect(() => {
