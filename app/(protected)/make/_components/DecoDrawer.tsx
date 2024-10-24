@@ -19,6 +19,8 @@ const stepDetails = [
 ];
 
 const DecoDrawer = ({ step }: { step: number }) => {
+  if (step !== 1 && step !== 3) return null;
+
   return (
     <Drawer>
       <DrawerTrigger className="pointer-events-auto rounded-lg bg-gray-300 p-2 px-4">

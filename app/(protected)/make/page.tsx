@@ -22,7 +22,9 @@ const MakePage = () => {
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
 
+  useEffect(() => {
     const isDecorated = sessionStorage.getItem('isDecorated');
     if (isDecorated) {
       router.replace('/main');
@@ -90,7 +92,7 @@ const MakePage = () => {
           </div>
         </div>
       </UISection>
-      <MakeCanvas />
+      <MakeCanvas step={step} />
     </>
   );
 };

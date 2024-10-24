@@ -3,21 +3,25 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import MainDecoration from '@/shared/components/3dModels/MainDecoration';
+import Bottom from '@/shared/components/3dModels/Bottom';
+import Base from '@/shared/components/3dModels/Base';
 
-const MakeCanvas = () => {
+const MakeCanvas = ({ step }: { step: number }) => {
   return (
     <section className="canvas-3d">
       <Canvas
         flat
         linear
         shadows={true}
-        camera={{ position: [5, 0, 0], fov: 100 }}
+        camera={{ position: [12, 0, 0], fov: 100 }}
       >
         <OrbitControls
           target={[0, 0, 0]}
           enablePan={false}
-          enableZoom={false}
-          // maxPolarAngle={(Math.PI / 2 / 9) * 8}
+          maxZoom={1}
+          minDistance={8}
+          maxDistance={15}
+          maxPolarAngle={(Math.PI / 2) * 1.2}
         />
         <ambientLight intensity={1.5} color={'#ffffff'} />
 
@@ -26,7 +30,13 @@ const MakeCanvas = () => {
           intensity={1.5}
           color={'#ffffff'}
         />
-        <MainDecoration />
+        {step >= 1 && <MainDecoration />}
+        {step >= 3 && (
+          <>
+            <Base />
+            <Bottom />
+          </>
+        )}
       </Canvas>
     </section>
   );
