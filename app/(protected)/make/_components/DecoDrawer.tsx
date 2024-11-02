@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
 import Decoration from './Decoration';
-import { MAIN_DECORATION } from '@/shared/constants/3dModel';
+import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
 
 const stepDetails = [
   '장식 선택하기',
@@ -25,7 +25,8 @@ const stepDetails = [
 const DecoDrawer = ({ step }: { step: number }) => {
   if (step !== 1 && step !== 3) return null;
 
-  const decorationArray = Object.values(MAIN_DECORATION);
+  const mainDecorationArray = Object.values(MAIN_DECORATION);
+  const bottomDecorationArray = Object.values(BOTTOM);
 
   return (
     <Drawer>
@@ -43,13 +44,18 @@ const DecoDrawer = ({ step }: { step: number }) => {
         </DrawerHeader>
 
         <div className="flex w-full overflow-auto">
-          {decorationArray.map((deco, index) => (
-            <Decoration key={index} path={deco} />
-          ))}
+          {step === 1 &&
+            mainDecorationArray.map((deco, index) => (
+              <Decoration key={index} path={deco} type={DECO_TYPE.MAIN} />
+            ))}
+
+          {step === 3 &&
+            bottomDecorationArray.map((deco, index) => (
+              <Decoration key={index} path={deco} type={DECO_TYPE.BOTTOM} />
+            ))}
         </div>
 
         <DrawerFooter>
-          {/* <Button>Submit</Button> */}
           <DrawerClose>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>
