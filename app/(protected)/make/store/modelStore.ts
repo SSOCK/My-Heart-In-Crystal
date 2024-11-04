@@ -28,7 +28,7 @@ export const use3DModel = create<ModelStore>((set) => ({
   bottom: BOTTOM.DEFAULT,
   modelColor: '#ff0000',
   bottomColor: '#ff0000',
-  title: '',
+  title: 'title',
   setModel: (newModel) =>
     set((prev: ModelStore) => ({ ...prev, model: newModel.model })),
   setModelColor: (newModelColor) =>
@@ -52,6 +52,6 @@ export const use3DModel = create<ModelStore>((set) => ({
       bottom: BOTTOM.DEFAULT,
       modelColor: '#ff0000',
       bottomColor: '#ff0000',
-      title: '',
+      title: 'title',
     }),
 }));
