@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import MainDecoration from '@/shared/components/3dModels/MainDecoration';
-import Bottom from '@/shared/components/3dModels/Bottom';
-import Base from '@/shared/components/3dModels/Base';
+import MainDecoration from '@/app/(protected)/make/_components/MainDecoration';
+import Bottom from '@/app/(protected)/make/_components/Bottom';
+import Base from '@/app/(protected)/make/_components/Base';
 
 const MakeCanvas = ({ step }: { step: number }) => {
   const [isMounted, setIsMounted] = useState(false);

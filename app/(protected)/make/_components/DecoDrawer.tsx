@@ -12,8 +12,15 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 
-import Decoration from './Decoration';
+import Decoration from '@/app/(protected)/make/_components/Decoration';
 import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
+
+import dynamic from 'next/dynamic';
+import TitleForm from '@/app/(protected)/make/_components/TitleForm';
+
+const ColorButton = dynamic(
+  () => import('@/app/(protected)/make/_components/ColorButton')
+);
 
 const stepDetails = [
   '장식 선택하기',
@@ -32,14 +39,19 @@ const DecoDrawer = ({ step }: { step: number }) => {
 
   if (!isMounted) return null;
 
-  if (step !== 1 && step !== 3) return null;
+  if (step === 2 || step === 4)
+    return (
+      <ColorButton type={step === 2 ? DECO_TYPE.MAIN : DECO_TYPE.BOTTOM} />
+    );
+
+  if (step === 5) return <TitleForm />;
 
   const mainDecorationArray = Object.values(MAIN_DECORATION);
   const bottomDecorationArray = Object.values(BOTTOM);
 
   return (
     <Drawer>
-      <DrawerTrigger className="pointer-events-auto rounded-lg bg-gray-300 p-2 px-4">
+      <DrawerTrigger className="pointer-events-auto transform rounded-lg bg-white p-2 px-4 transition duration-200 hover:bg-gray-300">
         {stepDetails[step - 1]}
       </DrawerTrigger>
       <DrawerContent className="flex flex-col items-center justify-center">

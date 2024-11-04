@@ -1,11 +1,27 @@
 'use client';
 
-import React, { Suspense } from 'react';
-import Make from './_components';
+import { useState, useEffect, Suspense } from 'react';
+
+import dynamic from 'next/dynamic';
+import { use3DModel } from './store/modelStore';
+const Make = dynamic(() => import('@/app/(protected)/make/_components/index'));
 
 const MakePage = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  const { resetModel } = use3DModel();
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    return () => {
+      resetModel();
+    };
+  }, []);
+
+  if (!isMounted) return null;
+
   return (
-    <Suspense fallback={<div>로딩 중...</div>}>
+    <Suspense fallback={null}>
       <Make />
     </Suspense>
   );

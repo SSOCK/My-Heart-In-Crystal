@@ -40,11 +40,6 @@ const Make = () => {
 
   const handleNext = () => {
     const nextStep = step + 1;
-    if (nextStep >= maxStep) {
-      router.replace('/main');
-      sessionStorage.setItem('isDecorated', 'true');
-      return;
-    }
     router.push(`/make?step=${nextStep}`);
     setStep(nextStep);
   };
@@ -76,12 +71,16 @@ const Make = () => {
             ) : (
               <div />
             )}
-            <Button
-              onClick={() => handleNext()}
-              className="pointer-events-auto bg-gray-700"
-            >
-              다음
-            </Button>
+            {step < maxStep - 1 ? (
+              <Button
+                onClick={() => handleNext()}
+                className="pointer-events-auto bg-gray-700"
+              >
+                다음
+              </Button>
+            ) : (
+              <div />
+            )}
           </div>
         </div>
       </UISection>

@@ -6,7 +6,7 @@ import { useFrame } from '@react-three/fiber';
 import { Mesh, Group, Vector3 } from 'three';
 
 import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
-import { use3DModel } from '@/app/(protected)/make/store/modelStore';
+import { MAIN_DECORATION } from '@/shared/constants/3dModel';
 
 const fallingModel = (
   modelRef: Group,
@@ -33,9 +33,7 @@ const fallingModel = (
 };
 
 const MainDecoration = () => {
-  const { model } = use3DModel() as { model: string };
-
-  const deco = useGLTF(model).scene.clone() as Group;
+  const deco = useGLTF(MAIN_DECORATION.DUCK).scene.clone() as Group;
   const speedRef = useRef<Vector3>(new Vector3(0, 0, 0));
   const isStoppedRef = useRef<boolean>(false);
 
