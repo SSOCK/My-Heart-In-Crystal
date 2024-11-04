@@ -23,11 +23,11 @@ const formSchema = z.object({
 
 const TitleForm = () => {
   const router = useRouter();
-  const { setTitle, title } = use3DModel();
+  const { setTitle } = use3DModel();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title,
+      title: '',
     },
   });
 

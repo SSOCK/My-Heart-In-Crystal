@@ -23,14 +23,14 @@ const MakeCanvas = ({ step }: { step: number }) => {
         flat
         linear
         shadows={true}
-        camera={{ position: [12, 0, 0], fov: 100 }}
+        camera={{ position: [12, 2, 0], fov: 100 }}
       >
         <OrbitControls
           target={[0, 0, 0]}
           enablePan={false}
           maxZoom={1}
-          minDistance={8}
-          maxDistance={15}
+          minDistance={12}
+          maxDistance={18}
           maxPolarAngle={(Math.PI / 2) * 1.2}
         />
         <ambientLight intensity={1.5} color={'#ffffff'} />
