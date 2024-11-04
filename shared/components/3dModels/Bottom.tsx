@@ -2,7 +2,8 @@
 
 import { Mesh, MeshStandardMaterial, CanvasTexture } from 'three';
 import { useGLTF } from '@react-three/drei';
-import { BOTTOM } from '@/shared/constants/3dModel';
+
+import { use3DModel } from '@/app/(protected)/make/store/modelStore';
 
 const makeCanvasTexture = ({
   width,
@@ -49,9 +50,10 @@ const makeCanvasTexture = ({
 };
 
 const Bottom = () => {
-  const bottom = useGLTF(BOTTOM.ONE).scene.clone();
+  const { bottom } = use3DModel() as { bottom: string };
+  const bottomModel = useGLTF(bottom).scene.clone();
 
-  const nameTag = bottom.getObjectByName('nameTag') as Mesh | undefined;
+  const nameTag = bottomModel.getObjectByName('nameTag') as Mesh | undefined;
 
   if (nameTag && nameTag.material instanceof MeshStandardMaterial) {
     const newTexture = makeCanvasTexture({
@@ -67,11 +69,11 @@ const Bottom = () => {
     nameTag.material.bumpMap = newTexture;
   }
 
-  bottom.scale.set(1, 1, 1);
-  bottom.position.set(0, 0, 0);
-  bottom.receiveShadow = true;
-  bottom.castShadow = true;
-  return <primitive object={bottom} />;
+  bottomModel.scale.set(1, 1, 1);
+  bottomModel.position.set(0, 0, 0);
+  bottomModel.receiveShadow = true;
+  bottomModel.castShadow = true;
+  return <primitive object={bottomModel} />;
 };
 
 export default Bottom;
