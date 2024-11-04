@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import MainDecoration from '@/shared/components/3dModels/MainDecoration';
@@ -7,6 +9,14 @@ import Bottom from '@/shared/components/3dModels/Bottom';
 import Base from '@/shared/components/3dModels/Base';
 
 const MakeCanvas = ({ step }: { step: number }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
   return (
     <section className="canvas-3d">
       <Canvas

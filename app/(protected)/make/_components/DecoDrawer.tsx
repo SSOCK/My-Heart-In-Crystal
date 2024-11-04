@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { ArrowLeftRight } from 'lucide-react';
 
 import {
@@ -10,7 +11,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
-import { Button } from '@/components/ui/button';
+
 import Decoration from './Decoration';
 import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
 
@@ -23,6 +24,14 @@ const stepDetails = [
 ];
 
 const DecoDrawer = ({ step }: { step: number }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
   if (step !== 1 && step !== 3) return null;
 
   const mainDecorationArray = Object.values(MAIN_DECORATION);
@@ -56,8 +65,8 @@ const DecoDrawer = ({ step }: { step: number }) => {
         </div>
 
         <DrawerFooter>
-          <DrawerClose>
-            <Button variant="outline">Cancel</Button>
+          <DrawerClose className="transform rounded-lg border-2 border-gray-400 p-2 px-4 transition duration-200 hover:bg-gray-300">
+            Cancel
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
