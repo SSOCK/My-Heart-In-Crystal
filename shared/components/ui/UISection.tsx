@@ -6,7 +6,7 @@ const UISection = ({ children }: { children: React.ReactNode }) => {
     <section className="ui-section">
       {children}
       <ModalProvider />
-      <Toaster />
+      <Toaster richColors />
     </section>
   );
 };
