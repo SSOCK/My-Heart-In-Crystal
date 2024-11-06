@@ -7,6 +7,7 @@ import { OrbitControls } from '@react-three/drei';
 import MainDecoration from '@/app/(protected)/make/_components/MainDecoration';
 import Bottom from '@/app/(protected)/make/_components/Bottom';
 import Base from '@/app/(protected)/make/_components/Base';
+import { STEP } from '@/app/(protected)/make/_constants/step';
 
 const MakeCanvas = ({ step }: { step: number }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -40,8 +41,8 @@ const MakeCanvas = ({ step }: { step: number }) => {
           intensity={1.5}
           color={'#ffffff'}
         />
-        {step >= 1 && <MainDecoration />}
-        {step >= 3 && (
+        {step >= STEP.MAIN_DECORATION && <MainDecoration />}
+        {step >= STEP.BOTTOM_DECORATION && (
           <>
             <Base />
             <Bottom />

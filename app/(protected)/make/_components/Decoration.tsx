@@ -6,8 +6,9 @@ import { Suspense } from 'react';
 import { DrawerClose } from '@/components/ui/drawer';
 import { DecorationType } from '@/shared/types/model';
 import { Canvas } from '@react-three/fiber';
-import Deco from '@/app/(protected)/make/_components/Deco';
-import { use3DModel } from '../store/modelStore';
+import InitializeDecoration from '@/app/(protected)/make/_components/InitializeDecoration';
+
+import { use3DModel } from '@/app/(protected)/make/store/modelStore';
 import { DECO_TYPE } from '@/shared/constants/3dModel';
 
 const Decoration = ({ path, type }: { path: string; type: DecorationType }) => {
@@ -41,7 +42,7 @@ const Decoration = ({ path, type }: { path: string; type: DecorationType }) => {
             intensity={1.5}
             color={'#ffffff'}
           />
-          <Deco path={path} type={type} />
+          <InitializeDecoration path={path} type={type} />
         </Suspense>
       </Canvas>
     </DrawerClose>

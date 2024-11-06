@@ -6,7 +6,13 @@ import { useFrame } from '@react-three/fiber';
 import { Group } from 'three';
 import { useEffect } from 'react';
 
-const Deco = ({ path, type }: { path: string; type: DecorationType }) => {
+const InitializeDecoration = ({
+  path,
+  type,
+}: {
+  path: string;
+  type: DecorationType;
+}) => {
   const { scene } = useGLTF(path);
   const deco = scene.clone() as Group;
 
@@ -39,4 +45,4 @@ const Deco = ({ path, type }: { path: string; type: DecorationType }) => {
   return <primitive object={deco} />;
 };
 
-export default Deco;
+export default InitializeDecoration;

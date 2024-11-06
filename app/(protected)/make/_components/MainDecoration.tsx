@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
 import { Mesh, Group } from 'three';
@@ -12,12 +11,6 @@ const MainDecoration = () => {
   const { model, modelColor } = use3DModel();
 
   const deco = useGLTF(model).scene.clone() as Group;
-
-  const isStoppedRef = useRef<boolean>(false);
-
-  useEffect(() => {
-    isStoppedRef.current = false;
-  }, [deco]);
 
   deco.name = 'MainDeco';
   deco.scale.set(1, 1, 1);
