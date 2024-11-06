@@ -5,17 +5,16 @@ import MakeCanvas from '@/app/(protected)/make/_components/MakeCanvas';
 import UISection from '@/shared/components/ui/UISection';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import PreviousButton from '@/shared/components/ui/PreviousButton';
 import DecoDrawer from '@/app/(protected)/make/_components/DecoDrawer';
+import { STEP } from '@/app/(protected)/make/_constants/step';
 
 const Make = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const maxStep = 6;
 
   const [step, setStep] = useState(() => {
     const stepParam = searchParams.get('step');
-    return stepParam ? parseInt(stepParam) : 1;
+    return stepParam ? parseInt(stepParam) : STEP.MAIN_DECORATION;
   });
 
   useEffect(() => {
@@ -27,9 +26,9 @@ const Make = () => {
       }
 
       const stepParam = searchParams.get('step');
-      const step = stepParam ? parseInt(stepParam) : 1;
+      const step = stepParam ? parseInt(stepParam) : STEP.MAIN_DECORATION;
 
-      if (isNaN(step) || step < 1 || step > maxStep) {
+      if (isNaN(step) || step < STEP.MAIN_DECORATION || step > STEP.MAX) {
         router.replace('/make?step=1');
         return;
       }
@@ -46,7 +45,6 @@ const Make = () => {
 
   return (
     <>
-      <PreviousButton />
       <UISection>
         <div className="space-y-10 bg-gray-300 text-center">
           <div>
@@ -71,7 +69,7 @@ const Make = () => {
             ) : (
               <div />
             )}
-            {step < maxStep - 1 ? (
+            {step < STEP.MAX ? (
               <Button
                 onClick={() => handleNext()}
                 className="pointer-events-auto bg-gray-700"

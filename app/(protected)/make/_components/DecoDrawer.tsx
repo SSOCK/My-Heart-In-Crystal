@@ -17,18 +17,11 @@ import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
 
 import dynamic from 'next/dynamic';
 import TitleForm from '@/app/(protected)/make/_components/TitleForm';
+import { STEP } from '@/app/(protected)/make/_constants/step';
 
 const ColorButton = dynamic(
   () => import('@/app/(protected)/make/_components/ColorButton')
 );
-
-const stepDetails = [
-  '장식 선택하기',
-  '장식 색상 바꾸기',
-  '받침대 선택하기',
-  '받침대 색상 바꾸기',
-  '수정구슬 이름 등록하기',
-];
 
 const DecoDrawer = ({ step }: { step: number }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -39,12 +32,21 @@ const DecoDrawer = ({ step }: { step: number }) => {
 
   if (!isMounted) return null;
 
-  if (step === 2 || step === 4)
+  if (
+    step === STEP.MAIN_DECORATION_COLOR ||
+    step === STEP.BOTTOM_DECORATION_COLOR
+  )
     return (
-      <ColorButton type={step === 2 ? DECO_TYPE.MAIN : DECO_TYPE.BOTTOM} />
+      <ColorButton
+        type={
+          step === STEP.MAIN_DECORATION_COLOR
+            ? DECO_TYPE.MAIN
+            : DECO_TYPE.BOTTOM
+        }
+      />
     );
 
-  if (step === 5) return <TitleForm />;
+  if (step === STEP.TITLE) return <TitleForm />;
 
   const mainDecorationArray = Object.values(MAIN_DECORATION);
   const bottomDecorationArray = Object.values(BOTTOM);
@@ -52,7 +54,7 @@ const DecoDrawer = ({ step }: { step: number }) => {
   return (
     <Drawer>
       <DrawerTrigger className="pointer-events-auto transform rounded-lg bg-white p-2 px-4 transition duration-200 hover:bg-gray-300">
-        {stepDetails[step - 1]}
+        {step === STEP.MAIN_DECORATION ? '장식 선택하기' : '바닥 장식 선택하기'}
       </DrawerTrigger>
       <DrawerContent className="flex flex-col items-center justify-center">
         <DrawerHeader className="flex flex-col items-center">
@@ -65,12 +67,12 @@ const DecoDrawer = ({ step }: { step: number }) => {
         </DrawerHeader>
 
         <div className="flex w-full overflow-auto">
-          {step === 1 &&
+          {step === STEP.MAIN_DECORATION &&
             mainDecorationArray.map((deco, index) => (
               <Decoration key={index} path={deco} type={DECO_TYPE.MAIN} />
             ))}
 
-          {step === 3 &&
+          {step === STEP.BOTTOM_DECORATION &&
             bottomDecorationArray.map((deco, index) => (
               <Decoration key={index} path={deco} type={DECO_TYPE.BOTTOM} />
             ))}
