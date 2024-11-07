@@ -135,3 +135,10 @@ html::-webkit-scrollbar {
 .message-list::-webkit-scrollbar {
   display: none;
 }
+
+.letter-paper {
+  height: 20rem;
+  border: none;
+  resize: none;
+  outline: none;
+}

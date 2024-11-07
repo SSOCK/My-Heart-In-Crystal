@@ -18,7 +18,7 @@ const VisitPage = ({ params }: { params: { userId: string } }) => {
     const isMaked = sessionStorage.getItem('visitToast');
 
     if (isMaked) {
-      toast.success('새로운 수정구슬이 생성되었습니다!');
+      toast.success('메세지가 성공적으로 전송되었습니다.');
       sessionStorage.removeItem('visitToast');
     }
   }, []);
@@ -31,7 +31,12 @@ const VisitPage = ({ params }: { params: { userId: string } }) => {
           <MessageCount count={10} />
         </div>
         <ArrowButtons />
-        <Button className="pointer-events-auto w-full md:w-1/2 xl:w-1/3">
+        <Button
+          className="pointer-events-auto w-full md:w-1/2 xl:w-1/3"
+          onClick={() => {
+            sessionStorage.removeItem('messageIsDecorated');
+          }}
+        >
           <Link
             href="/visit/[userId]/message"
             as={`/visit/${params.userId}/message`}
