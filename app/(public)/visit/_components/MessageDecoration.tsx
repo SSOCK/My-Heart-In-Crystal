@@ -9,7 +9,6 @@ import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
 
 const MessageDecoration = () => {
   const { model, modelColor } = use3DModel();
-  console.log('model', model);
 
   const deco = useGLTF(model).scene.clone() as Group;
 

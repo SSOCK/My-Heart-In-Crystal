@@ -11,6 +11,8 @@ import DecoDrawer from '@/app/(public)/visit/_components/DecoDrawer';
 import MakeCanvas from '@/app/(public)/visit/_components/MakeCanvas';
 import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 
+import LetterPaper from './LetterPaper';
+
 const Make = ({ userId }: { userId: string }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -56,8 +58,9 @@ const Make = ({ userId }: { userId: string }) => {
             <h1>메세지 전송하기</h1>
             <p>전송한 메세지는 수정 구슬 속 예쁜 장식이 될 거예요.</p>
           </div>
-          <Progress value={step * 20} />
+          <Progress value={step * 25} />
         </div>
+        {step >= STEP.MESSAGE_NOTE_COLOR && <LetterPaper step={step} />}
         <div className="flex w-full flex-col items-center justify-center gap-12">
           <DecoDrawer step={step} userId={userId} />
 

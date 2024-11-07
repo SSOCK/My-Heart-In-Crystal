@@ -33,7 +33,7 @@ const DecoDrawer = ({ step, userId }: { step: number; userId: string }) => {
   )
     return <ColorButton step={step} />;
 
-  if (step === STEP.MESSAGE) return <MessageForm userId={userId} />;
+  if (step === STEP.MESSAGE) return <MessageForm userId={userId} step={step} />;
 
   const decorationArray = Object.values(DECO);
   const decorationPath = decorationArray.map((deco) => deco.fileName);
