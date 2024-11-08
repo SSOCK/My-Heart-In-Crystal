@@ -1,4 +1,5 @@
 import mongoose, { Document, Model } from 'mongoose';
+import Message from '@/shared/database/mongodb/models/messageModel';
 
 // Crystal 인터페이스 정의
 export interface ICrystal {
@@ -30,7 +31,17 @@ const crystalSchema = new mongoose.Schema<ICrystalDocument>(
   }
 );
 
-// Crystal 모델 생성
+// Crystal 삭제 시 관련된 Message 모두 삭제
+crystalSchema.pre('findOneAndDelete', async function (next) {
+  // 현재 삭제될 Crystal 문서를 찾음
+  const crystal = await this.model.findOne(this.getFilter());
+  if (crystal) {
+    // 해당 crystal_id를 가진 모든 Message 삭제
+    await Message.deleteMany({ crystal_id: crystal._id });
+  }
+  next();
+});
+
 const Crystal: Model<ICrystalDocument> =
   mongoose.models?.Crystal || mongoose.model('Crystal', crystalSchema);
 
