@@ -5,8 +5,7 @@ export interface IUser {
   email: string;
   uuid: string;
   crystal_id: string[] | [];
-  username: string;
-  nickname: string | null;
+  username: string | null;
   provider: string;
 }
 
@@ -19,8 +18,7 @@ const userSchema = new mongoose.Schema<IUserDocument>(
     email: { type: String, required: true, unique: true },
     uuid: { type: String, required: true },
     crystal_id: { type: [String], required: true },
-    username: { type: String, required: true },
-    nickname: { type: String, required: true },
+    username: { type: String, default: null },
     provider: { type: String, required: true },
   },
   {
