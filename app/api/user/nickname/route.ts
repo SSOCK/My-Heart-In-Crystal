@@ -44,7 +44,7 @@ export const POST = async (req: NextRequest) => {
   } catch (error) {
     console.error('Error updating username:', error);
     return NextResponse.json(
-      { error: 'Failed to update username' },
+      { error: 'Failed to update username' + error },
       { status: 500 }
     );
   }

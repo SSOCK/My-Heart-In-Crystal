@@ -69,12 +69,16 @@ const DecoDrawer = ({ step }: { step: number }) => {
         <div className="flex w-full overflow-auto">
           {step === STEP.MAIN_DECORATION &&
             mainDecorationArray.map((deco, index) => (
-              <Decoration key={index} path={deco} type={DECO_TYPE.MAIN} />
+              <Decoration key={index} path={deco.path} type={DECO_TYPE.MAIN} />
             ))}
 
           {step === STEP.BOTTOM_DECORATION &&
             bottomDecorationArray.map((deco, index) => (
-              <Decoration key={index} path={deco} type={DECO_TYPE.BOTTOM} />
+              <Decoration
+                key={index}
+                path={deco.path}
+                type={DECO_TYPE.BOTTOM}
+              />
             ))}
         </div>
 
