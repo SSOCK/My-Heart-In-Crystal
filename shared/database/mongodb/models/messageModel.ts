@@ -2,8 +2,8 @@ import mongoose, { Document, Model } from 'mongoose';
 
 // Message 인터페이스 정의
 export interface IMessage {
-  user_id: string;
-  crystal_id: string;
+  user_id: mongoose.Schema.Types.ObjectId;
+  crystal_id: mongoose.Schema.Types.ObjectId;
   decoration_id: number;
   decoration_color: string;
   content: string;
@@ -19,8 +19,16 @@ export interface IMessageDocument extends IMessage, Document {}
 // Message 스키마 정의
 const messageSchema = new mongoose.Schema<IMessageDocument>(
   {
-    user_id: { type: String, required: true },
-    crystal_id: { type: String, required: true },
+    user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    crystal_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Crystal',
+      required: true,
+    },
     decoration_id: { type: Number, required: true },
     decoration_color: { type: String, required: true },
     content: { type: String, required: true },
