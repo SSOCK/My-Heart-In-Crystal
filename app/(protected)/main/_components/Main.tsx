@@ -17,13 +17,16 @@ import HamburgerButton from '../_components/ui/HamburgerButton';
 import { User } from '@/shared/types/user';
 
 import fetchCrystal from '../_utils/fetchCrystal';
+import { Crystal } from '@/shared/types/crystal';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const Main = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const [current, setCurrent] = useState<number>(0);
   const { data: session } = useSession();
   const router = useRouter();
   const user = session?.user as User;
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery<Crystal[]>({
     queryKey: ['crystal'],
     queryFn: () => fetchCrystal(user._id),
     gcTime: 0,
@@ -43,7 +46,13 @@ const Main = () => {
   if (!isMounted) return null;
   if (isLoading || isError) return null;
 
-  console.log(data, session);
+  const crystalCount = data?.length;
+  const messageCount = data?.reduce(
+    (acc, cur) => acc + cur.message_id.length,
+    0
+  );
+
+  console.log(data);
 
   return (
     <>
@@ -52,14 +61,35 @@ const Main = () => {
       <UISection>
         <div className="flex flex-col items-center gap-2">
           <UserHeader user={user.username || ''} />
-          <MessageCount count={10} />
+          <MessageCount count={messageCount || 0} />
+        </div>
+        <div className="flex w-full justify-between md:px-16">
+          {/* arrow left and right */}
+          {current > 0 ? (
+            <ArrowLeft
+              onClick={() => setCurrent((prev) => prev - 1)}
+              className="pointer-events-auto transform cursor-pointer rounded-full p-1 transition duration-200 hover:bg-primary hover:text-white"
+              size={'2rem'}
+            />
+          ) : (
+            <div />
+          )}
+          {current < crystalCount! - 1 ? (
+            <ArrowRight
+              onClick={() => setCurrent((prev) => prev + 1)}
+              className="pointer-events-auto transform cursor-pointer rounded-full p-1 transition duration-200 hover:bg-primary hover:text-white"
+              size={'2rem'}
+            />
+          ) : (
+            <div />
+          )}
         </div>
         <div className="flex w-full justify-between">
           <FullScreen />
           <ShareLink userId={user.uuid} />
         </div>
       </UISection>
-      <CrystalCanvas />
+      <CrystalCanvas data={data || []} current={current} />
     </>
   );
 };

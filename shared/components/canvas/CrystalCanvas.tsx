@@ -1,19 +1,27 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import Bottom from '@/shared/components/3dModels/Bottom';
 
 import { OrbitControls } from '@react-three/drei';
+import MainDecoration from '@/app/(protected)/main/_components/MainDecoration';
+import Bottom from '@/app/(protected)/main/_components/Bottom';
+import Decorations from '@/app/(protected)/main/_components/Decorations';
+
 import Base from '@/shared/components/3dModels/Base';
-import MainDecoration from '@/shared/components/3dModels/MainDecoration';
 import Glass from '@/shared/components/3dModels/Glass';
 import Snowflake from '@/shared/components/3dModels/Snowflake';
 import Ground from '@/shared/components/3dModels/Ground';
 
 import Raycaster from '@/shared/components/canvas/Raycaster';
-import Decorations from '@/shared/components/canvas/Decorations';
+import { Crystal } from '@/shared/types/crystal';
 
-const CrystalCanvas = () => {
+const CrystalCanvas = ({
+  data,
+  current,
+}: {
+  data: Crystal[];
+  current: number;
+}) => {
   return (
     <section className="canvas-3d">
       <Canvas
@@ -49,10 +57,17 @@ const CrystalCanvas = () => {
         {Array.from({ length: 100 }, (_, i) => (
           <Snowflake key={i} />
         ))}
-        <Decorations />
-        <MainDecoration />
+        <Decorations crystal={data[current]._id} />
+        <MainDecoration
+          id={data[current].main_decoration_id}
+          color={data[current].main_decoration_color}
+        />
         <Base />
-        <Bottom />
+        <Bottom
+          id={data[current].bottom_decoration_id}
+          color={data[current].bottom_decoration_color}
+          title={data[current].title}
+        />
         <Ground />
       </Canvas>
     </section>

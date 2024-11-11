@@ -91,7 +91,7 @@ export const GET = async (req: NextRequest) => {
       })
     );
 
-    return NextResponse.json({ crystalDatas, ok: true });
+    return NextResponse.json({ data: crystalDatas, ok: true });
   } catch (error) {
     console.error('Error fetching crystal:', error);
     return NextResponse.json(
