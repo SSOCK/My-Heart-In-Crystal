@@ -66,6 +66,10 @@ export const POST = async (req: NextRequest) => {
 
 export const GET = async (req: NextRequest) => {
   const userId = req.headers.get('X-User-Id');
+
+  if (!userId) {
+    return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
+  }
   // 세션 확인
   const session = await getServerSession();
   if (!session) {
