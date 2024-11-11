@@ -2,10 +2,9 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+
 import React from 'react';
 import { Menu } from 'lucide-react';
-
-import useModal from '@/shared/hooks/useModal';
 
 import {
   Sheet,
@@ -16,17 +15,36 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+
 import { toast } from 'sonner';
 import { signOut } from 'next-auth/react';
+
+import fetchAllMessages from '@/app/(protected)/main/_utils/fetchAllMessages';
+
+import useModal from '@/shared/hooks/useModal';
 import { ROUTES } from '@/shared/constants/routes';
 import { User } from '@/shared/types/user';
 import { MAX_CRYSTAL } from '@/shared/constants/enum';
+import MODAL_TYPE from '@/shared/constants/modal';
 
 const HamburgerButton = () => {
   const { onOpen } = useModal();
   const router = useRouter();
   const { data: session } = useSession();
   const user = session?.user as User;
+
+  const onOpenAllMessage = async () => {
+    try {
+      const messages = await fetchAllMessages(user._id);
+      if (messages.length === 0) {
+        toast.error('메세지가 없습니다.');
+        return;
+      }
+      onOpen(MODAL_TYPE.ALL_MESSAGE, { data: messages });
+    } catch (error) {
+      toast.error('메세지를 불러오는데 실패했습니다.');
+    }
+  };
 
   return (
     <>
@@ -48,7 +66,7 @@ const HamburgerButton = () => {
           <div className="flex w-full flex-col gap-2">
             <Button
               onClick={() => {
-                onOpen('AllMessage');
+                onOpenAllMessage();
               }}
             >
               모든 편지 보기
@@ -67,7 +85,7 @@ const HamburgerButton = () => {
             </Button>
             {/* <Button
               onClick={() => {
-                onOpen('Form');
+                onOpen(MODAL_TYPE.FORM);
               }}
             >
               내 정보 수정

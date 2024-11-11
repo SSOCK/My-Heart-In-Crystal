@@ -15,13 +15,17 @@ import {
 import { Button } from '@/components/ui/button';
 import useModal from '@/shared/hooks/useModal';
 import { ROUTES } from '@/shared/constants/routes';
+import MODAL_TYPE from '@/shared/constants/modal';
 
 const IntroButtonSection = () => {
   const { onOpen } = useModal();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <Button className="pointer-events-auto" onClick={() => onOpen('Intro')}>
+      <Button
+        className="pointer-events-auto"
+        onClick={() => onOpen(MODAL_TYPE.INTRODUCE)}
+      >
         소개
       </Button>
       <Drawer>
@@ -56,7 +60,7 @@ const IntroButtonSection = () => {
               구글로 로그인
             </Button>
             {/* <Button
-              onClick={() => onOpen('Guest')}
+              onClick={() => onOpen(MODAL_TYPE.GUEST)}
               className="w-1/2"
               variant="outline"
             >
