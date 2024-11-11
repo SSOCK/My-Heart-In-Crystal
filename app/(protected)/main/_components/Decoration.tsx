@@ -4,7 +4,6 @@ import { useGLTF } from '@react-three/drei';
 
 import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
 import { DECO } from '@/shared/constants/3dModel';
-import { MSG_COLOR } from '@/shared/constants/modal';
 
 interface DecoProps {
   id: number;
@@ -13,7 +12,7 @@ interface DecoProps {
   message: string;
   color: string;
   sender: string;
-  letterID: number;
+  letterID: string;
   isOpened: boolean;
   messageID: string;
   sendAt: string;
@@ -55,7 +54,7 @@ const Decoration = ({
     if (child instanceof Mesh) {
       child.userData.message = message;
       child.userData.sender = sender;
-      child.userData.letterColor = MSG_COLOR[letterID].color;
+      child.userData.letterColor = letterID;
       child.userData.messageID = messageID;
       child.userData.sendAt = sendAt;
       child.castShadow = false;

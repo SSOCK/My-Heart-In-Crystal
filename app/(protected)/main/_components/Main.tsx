@@ -3,16 +3,15 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
 
-import CrystalCanvas from '@/shared/components/canvas/CrystalCanvas';
 import UISection from '@/shared/components/ui/UISection';
-
 import PreviousButton from '@/shared/components/ui/PreviousButton';
 import UserHeader from '@/shared/components/ui/UserHeader';
 import MessageCount from '@/shared/components/ui/MessageCount';
 
-import ShareLink from '../_components/ui/ShareLink';
-import FullScreen from '../_components/ui/FullScreen';
-import HamburgerButton from '../_components/ui/HamburgerButton';
+import CrystalCanvas from '@/app/(protected)/main/_components/CrystalCanvas';
+import ShareLink from '@/app/(protected)/main/_components/ui/ShareLink';
+import FullScreen from '@/app/(protected)/main/_components/ui/FullScreen';
+import HamburgerButton from '@/app/(protected)/main/_components/ui/HamburgerButton';
 
 import { User } from '@/shared/types/user';
 
