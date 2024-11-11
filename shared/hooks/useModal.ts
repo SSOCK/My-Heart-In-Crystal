@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 
 import { ModalType } from '@/shared/constants/modal';
-import { Message } from '../types/message';
+import { MessageType } from '@/shared/types/message';
+import { Message } from '@/shared/types/message';
 
 type ModalProps = {
-  data?: Message[];
+  data?: Message[] | MessageType;
 };
 
 interface ModalStore {
