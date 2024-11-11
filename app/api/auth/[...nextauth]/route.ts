@@ -27,7 +27,10 @@ const handler = NextAuth({
     async signIn({ user, account }) {
       await connectToMongoDB();
 
-      const existingUser = await User.findOne({ email: user.email });
+      const existingUser = await User.findOne({
+        email: user.email,
+        provider: account?.provider,
+      });
       if (!existingUser) {
         const uuid = uuidv4();
         const newUser: IUser = {
