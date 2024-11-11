@@ -1,10 +1,10 @@
 import mongoose, { Document, Model } from 'mongoose';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
-// User 인터페이스 정의 (createdAt 필드 제거)
+
 export interface IUser {
   email: string;
   uuid: string;
-  crystal_id: string[] | [];
+  crystal_id: mongoose.Schema.Types.ObjectId[] | [];
   username: string | null;
   provider: string;
 }
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema<IUserDocument>(
   {
     email: { type: String, required: true, unique: true },
     uuid: { type: String, required: true },
-    crystal_id: { type: [String], required: true },
+    crystal_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Crystal' }],
     username: { type: String, default: null },
     provider: { type: String, required: true },
   },
@@ -32,11 +32,7 @@ userSchema.pre('findOneAndDelete', async function (next) {
   const user = await this.model.findOne(this.getFilter());
   if (user) {
     // 해당 user_id를 가진 모든 Crystal 삭제
-    const crystals = await Crystal.find({ user_id: user._id });
-    for (const crystal of crystals) {
-      // 각 Crystal 삭제 시 관련 Message도 삭제되도록 트리거됨
-      await crystal.deleteOne();
-    }
+    await Crystal.deleteMany({ user_id: user._id });
   }
   next();
 });
