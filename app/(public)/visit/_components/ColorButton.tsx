@@ -16,12 +16,10 @@ const ColorButton = ({ step }: { step: number }) => {
     use3DModel();
 
   const handleColorChange = (color: ColorResult) => {
-    console.log(color.hex);
     if (step === STEP.MESSAGE_DECORATION_COLOR) {
       setModelColor({ modelColor: color.hex });
     } else if (step === STEP.MESSAGE_NOTE_COLOR) {
       setMessageColor({ messageColor: color.hex });
-      console.log(messageColor);
     }
   };
 

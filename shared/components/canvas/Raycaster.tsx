@@ -6,6 +6,7 @@ import usePrev from '@/shared/hooks/usePrev';
 import useModal from '@/shared/hooks/useModal';
 
 import { MessageType } from '@/shared/types/message';
+import MODAL_TYPE from '@/shared/constants/modal';
 
 const Raycaster = () => {
   const { camera, pointer, raycaster, scene, gl } = useThree();
@@ -72,7 +73,7 @@ const Raycaster = () => {
         const { message, sender, letterColor, messageID, sendAt } =
           selectedDeco.object.userData;
 
-        onOpen('Message', {
+        onOpen(MODAL_TYPE.MESSAGE, {
           data: {
             message,
             sender,

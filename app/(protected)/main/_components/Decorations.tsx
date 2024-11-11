@@ -16,7 +16,6 @@ const Decorations = ({ crystal }: { crystal: Crystal['_id'] }) => {
 
   if (isLoading || isError) return null;
   if (!data) return null;
-  console.log(data);
 
   const decos = data.map((message, index) => (
     <Decoration
