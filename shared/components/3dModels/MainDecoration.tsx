@@ -35,7 +35,7 @@ const fallingModel = (
 };
 
 const MainDecoration = () => {
-  const deco = useGLTF(MAIN_DECORATION.DUCK).scene.clone() as Group;
+  const deco = useGLTF(MAIN_DECORATION.DUCK.path).scene.clone() as Group;
   const speedRef = useRef<Vector3>(new Vector3(0, 0, 0));
   const isStoppedRef = useRef<boolean>(false);
 

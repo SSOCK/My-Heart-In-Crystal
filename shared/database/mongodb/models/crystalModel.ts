@@ -20,7 +20,7 @@ const crystalSchema = new mongoose.Schema<ICrystalDocument>(
   {
     user_id: { type: String, required: true },
     title: { type: String, required: true },
-    is_private: { type: Date, required: true, default: null },
+    is_private: { type: Date, default: null },
     main_decoration_color: { type: String, required: true },
     main_decoration_id: { type: Number, required: true },
     bottom_decoration_color: { type: String, required: true },

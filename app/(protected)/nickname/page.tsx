@@ -56,7 +56,7 @@ const Nickname = () => {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        update({ ...session?.user, username: values.username });
+        update({ ...session?.user, username: response.username });
         router.replace(ROUTES.MAKE);
       }
     } catch (error) {
