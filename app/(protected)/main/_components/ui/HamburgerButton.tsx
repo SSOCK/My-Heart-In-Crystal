@@ -15,6 +15,8 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+import { signOut } from 'next-auth/react';
+import ROUTES from '@/shared/constants/route';
 
 const HamburgerButton = () => {
   const { onOpen } = useModal();
@@ -60,7 +62,9 @@ const HamburgerButton = () => {
             >
               내 정보 수정
             </Button>
-            <Button>로그아웃</Button>
+            <Button onClick={() => signOut({ callbackUrl: ROUTES.LANDING })}>
+              로그아웃
+            </Button>
           </div>
         </SheetContent>
       </Sheet>
