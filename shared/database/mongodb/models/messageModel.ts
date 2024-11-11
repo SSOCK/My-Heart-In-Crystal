@@ -8,7 +8,7 @@ export interface IMessage {
   decoration_color: string;
   content: string;
   sender: string;
-  location_id: number;
+  letter_color: string;
   is_deleted: Date;
   is_opend: Date;
 }
@@ -33,7 +33,7 @@ const messageSchema = new mongoose.Schema<IMessageDocument>(
     decoration_color: { type: String, required: true },
     content: { type: String, required: true },
     sender: { type: String, required: true },
-    location_id: { type: Number, required: true },
+    letter_color: { type: String, required: true },
     is_deleted: { type: Date, default: null },
     is_opend: { type: Date, default: null },
   },

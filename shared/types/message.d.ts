@@ -1,4 +1,5 @@
 import { Sentiment } from '@/shared/constants/3dModel';
+import { IMessage } from '@/shared/database/mongodb/models/messageModel';
 
 export type MessageResponse = {
   content: string;
@@ -24,3 +25,9 @@ export type MessageType = {
   messageID: number;
   sendAt: string;
 };
+
+export type Message = {
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+} & IMessage;
