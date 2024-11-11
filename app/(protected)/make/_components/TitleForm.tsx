@@ -57,6 +57,7 @@ const TitleForm = () => {
       modelColor,
       bottom: bottomId,
       bottomColor,
+      message_id: [],
     };
 
     try {
@@ -67,7 +68,6 @@ const TitleForm = () => {
 
       if (response.ok) {
         update({ ...session?.user, crystal_id: response.crystal_id });
-        console.log('success', response);
         router.replace(ROUTES.MAIN);
         sessionStorage.setItem('isDecorated', 'true');
         sessionStorage.setItem('toast', 'true');

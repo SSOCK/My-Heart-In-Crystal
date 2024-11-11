@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Menu } from 'lucide-react';
@@ -15,12 +16,17 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 import { signOut } from 'next-auth/react';
 import { ROUTES } from '@/shared/constants/routes';
+import { User } from '@/shared/types/user';
+import { MAX_CRYSTAL } from '@/shared/constants/enum';
 
 const HamburgerButton = () => {
   const { onOpen } = useModal();
   const router = useRouter();
+  const { data: session } = useSession();
+  const user = session?.user as User;
 
   return (
     <>
@@ -49,19 +55,23 @@ const HamburgerButton = () => {
             </Button>
             <Button
               onClick={() => {
+                if (user && user.crystal_id.length >= MAX_CRYSTAL) {
+                  toast.error('더 이상 수정구슬을 만들 수 없습니다.');
+                  return;
+                }
                 sessionStorage.removeItem('isDecorated');
                 router.push('/make');
               }}
             >
               새로운 수정구슬 만들기
             </Button>
-            <Button
+            {/* <Button
               onClick={() => {
                 onOpen('Form');
               }}
             >
               내 정보 수정
-            </Button>
+            </Button> */}
             <Button onClick={() => signOut({ callbackUrl: ROUTES.LANDING })}>
               로그아웃
             </Button>
