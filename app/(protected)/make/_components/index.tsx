@@ -1,15 +1,19 @@
+import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
+import { User } from '@/shared/types/user';
+import { ROUTES } from '@/shared/constants/routes';
 import MakeCanvas from '@/app/(protected)/make/_components/MakeCanvas';
 import UISection from '@/shared/components/ui/UISection';
+import DecoDrawer from '@/app/(protected)/make/_components/DecoDrawer';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import DecoDrawer from '@/app/(protected)/make/_components/DecoDrawer';
 import { STEP } from '@/app/(protected)/make/_constants/step';
 
 const Make = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
 
   const [step, setStep] = useState(() => {
@@ -36,6 +40,11 @@ const Make = () => {
       setStep(step);
     }
   }, [searchParams, router]);
+
+  useEffect(() => {
+    const user = session?.user as User;
+    if (user && user.crystal_id.length === 5) router.replace(ROUTES.MAIN);
+  }, [session, router]);
 
   const handleNext = () => {
     const nextStep = step + 1;

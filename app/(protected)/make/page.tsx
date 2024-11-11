@@ -1,32 +1,20 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
-
 import dynamic from 'next/dynamic';
-import { use3DModel } from './store/modelStore';
+import { Suspense } from 'react';
+import CheckAuth from '../_provider/CheckAuth';
 
 const Make = dynamic(() => import('@/app/(protected)/make/_components/index'), {
   ssr: false,
 });
 
 const MakePage = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const { resetModel } = use3DModel();
-
-  useEffect(() => {
-    setIsMounted(true);
-
-    return () => {
-      resetModel();
-    };
-  }, []);
-
-  if (!isMounted) return null;
-
   return (
-    <Suspense fallback={null}>
-      <Make />
-    </Suspense>
+    <CheckAuth>
+      <Suspense fallback={null}>
+        <Make />
+      </Suspense>
+    </CheckAuth>
   );
 };
 

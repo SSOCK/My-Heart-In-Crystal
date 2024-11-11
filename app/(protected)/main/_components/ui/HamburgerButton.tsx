@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { signOut } from 'next-auth/react';
-import ROUTES from '@/shared/constants/route';
+import { ROUTES } from '@/shared/constants/routes';
 
 const HamburgerButton = () => {
   const { onOpen } = useModal();

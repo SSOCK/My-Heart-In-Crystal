@@ -1,4 +1,4 @@
-const ROUTES = {
+export const ROUTES = {
   LANDING: '/',
   MAIN: '/main',
   NICKNAME: '/nickname',
@@ -7,4 +7,6 @@ const ROUTES = {
   MESSAGE: (id: string) => `/visit/${id}/message`,
 } as const;
 
-export default ROUTES;
+export const BACKEND_ROUTES = {
+  NICKNAME: '/api/user/nickname',
+} as const;
