@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
 import useModal from '@/shared/hooks/useModal';
-import ROUTES from '@/shared/constants/route';
+import { ROUTES } from '@/shared/constants/routes';
 
 const IntroButtonSection = () => {
   const { onOpen } = useModal();
