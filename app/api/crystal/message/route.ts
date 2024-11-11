@@ -7,6 +7,13 @@ import { Crystal as CrystalType } from '@/shared/types/crystal';
 
 export const GET = async (req: NextRequest) => {
   const crystalId = req.headers.get('X-Crystal-Id');
+
+  if (!crystalId) {
+    return NextResponse.json(
+      { error: 'Crystal ID is required' },
+      { status: 400 }
+    );
+  }
   // 세션 확인
   const session = await getServerSession();
   if (!session) {

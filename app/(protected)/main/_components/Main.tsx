@@ -51,8 +51,6 @@ const Main = () => {
     0
   );
 
-  console.log(data);
-
   return (
     <>
       <PreviousButton />
@@ -63,7 +61,6 @@ const Main = () => {
           <MessageCount count={messageCount || 0} />
         </div>
         <div className="flex w-full justify-between md:px-16">
-          {/* arrow left and right */}
           {current > 0 ? (
             <ArrowLeft
               onClick={() => setCurrent((prev) => prev - 1)}

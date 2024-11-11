@@ -19,6 +19,13 @@ export const POST = async (req: NextRequest) => {
   // 요청에서 데이터 추출
   const { username, userId } = (await req.json()) as NicknameReq;
 
+  if (!username || !userId) {
+    return NextResponse.json(
+      { error: 'Username and userId are required' },
+      { status: 400 }
+    );
+  }
+
   // MongoDB에 연결
   await connectToMongoDB();
 

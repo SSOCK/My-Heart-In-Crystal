@@ -9,8 +9,8 @@ export interface IMessage {
   content: string;
   sender: string;
   letter_color: string;
-  is_deleted: Date;
-  is_opend: Date;
+  is_deleted: Date | null;
+  is_opend: Date | null;
 }
 
 // IMessage와 Document 인터페이스를 결합하여 MongoDB 문서의 타입 정의
