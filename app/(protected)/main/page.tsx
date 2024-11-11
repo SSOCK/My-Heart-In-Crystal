@@ -13,6 +13,7 @@ import MessageCount from '@/shared/components/ui/MessageCount';
 import ShareLink from './_components/ui/ShareLink';
 import FullScreen from './_components/ui/FullScreen';
 import HamburgerButton from './_components/ui/HamburgerButton';
+import CheckAuth from '../_provider/CheckAuth';
 
 const MainPage = () => {
   useEffect(() => {
@@ -25,7 +26,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <>
+    <CheckAuth>
       <PreviousButton />
       <HamburgerButton />
       <UISection>
@@ -39,7 +40,7 @@ const MainPage = () => {
         </div>
       </UISection>
       <CrystalCanvas />
-    </>
+    </CheckAuth>
   );
 };
 
