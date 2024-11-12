@@ -4,7 +4,7 @@ export const ROUTES = {
   NICKNAME: '/nickname',
   MAKE: '/make',
   VISIT_USER: (id: string) => `/visit/${id}`,
-  MESSAGE: (id: string) => `/visit/${id}/message`,
+  MESSAGE: (id: string, crystal: string) => `/visit/${id}/${crystal}`,
   ERROR: '/404',
 } as const;
 

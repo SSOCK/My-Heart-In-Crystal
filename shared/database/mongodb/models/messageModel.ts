@@ -2,8 +2,8 @@ import mongoose, { Document, Model } from 'mongoose';
 
 // Message 인터페이스 정의
 export interface IMessage {
-  user_id: mongoose.Schema.Types.ObjectId;
-  crystal_id: mongoose.Schema.Types.ObjectId;
+  user_id: mongoose.Schema.Types.ObjectId | string;
+  crystal_id: mongoose.Schema.Types.ObjectId | string;
   decoration_id: number;
   decoration_color: string;
   content: string;

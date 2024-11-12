@@ -1,5 +1,7 @@
 'use client';
 
+import mongoose from 'mongoose';
+
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -12,8 +14,19 @@ import MakeCanvas from '@/app/(public)/visit/_components/_make/MakeCanvas';
 import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 
 import LetterPaper from '@/app/(public)/visit/_components/_make/LetterPaper';
+import { ROUTES } from '@/shared/constants/routes';
 
-const Make = ({ userId }: { userId: string }) => {
+const Make = ({
+  userId,
+  uuid,
+  crystalId,
+  index,
+}: {
+  userId: string | mongoose.Schema.Types.ObjectId;
+  uuid: string;
+  crystalId: string | mongoose.Schema.Types.ObjectId;
+  index: string;
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -26,7 +39,7 @@ const Make = ({ userId }: { userId: string }) => {
     if (typeof window !== 'undefined') {
       const isDecorated = sessionStorage.getItem('messageIsDecorated');
       if (isDecorated) {
-        router.replace(`/visit/${userId}`);
+        router.replace(ROUTES.VISIT_USER(uuid));
         return;
       }
 
@@ -35,7 +48,7 @@ const Make = ({ userId }: { userId: string }) => {
 
       if (isNaN(step) || step < STEP.MESSAGE_DECORATION || step > STEP.MAX) {
         router.replace(
-          `/visit/${userId}/message?step=${STEP.MESSAGE_DECORATION}`
+          `${ROUTES.VISIT_USER(uuid)}/${index}?step=${STEP.MESSAGE_DECORATION}`
         );
         return;
       }
@@ -46,7 +59,7 @@ const Make = ({ userId }: { userId: string }) => {
 
   const handleNext = () => {
     const nextStep = step + 1;
-    router.push(`/visit/${userId}/message?step=${nextStep}`);
+    router.push(`${ROUTES.VISIT_USER(uuid)}/${index}?step=${nextStep}`);
     setStep(nextStep);
   };
 
@@ -62,7 +75,12 @@ const Make = ({ userId }: { userId: string }) => {
         </div>
         {step >= STEP.MESSAGE_NOTE_COLOR && <LetterPaper step={step} />}
         <div className="flex w-full flex-col items-center justify-center gap-12">
-          <DecoDrawer step={step} userId={userId} crystalId="123" />
+          <DecoDrawer
+            step={step}
+            userId={userId}
+            uuid={uuid}
+            crystalId={crystalId}
+          />
 
           <div className="flex w-full justify-between md:w-1/2">
             {step > 1 ? (

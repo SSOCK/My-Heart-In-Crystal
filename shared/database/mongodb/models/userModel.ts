@@ -4,7 +4,7 @@ import Crystal from '@/shared/database/mongodb/models/crystalModel';
 export interface IUser {
   email: string;
   uuid: string;
-  crystal_id: mongoose.Schema.Types.ObjectId[] | [];
+  crystal_id: mongoose.Schema.Types.ObjectId[] | string[] | [];
   username: string | null;
   provider: string;
 }

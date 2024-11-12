@@ -1,4 +1,7 @@
 'use client';
+
+import mongoose from 'mongoose';
+
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -36,11 +39,13 @@ const formSchema = z.object({
 
 const MessageForm = ({
   userId,
+  uuid,
   crystalId,
   step,
 }: {
-  userId: string;
-  crystalId: string;
+  userId: string | mongoose.Schema.Types.ObjectId;
+  uuid: string;
+  crystalId: string | mongoose.Schema.Types.ObjectId;
   step: number;
 }) => {
   const router = useRouter();
@@ -81,7 +86,7 @@ const MessageForm = ({
       });
 
       if (response.ok) {
-        router.replace(`/visit/${userId}`);
+        router.replace(`/visit/${uuid}`);
         sessionStorage.setItem('messageIsDecorated', 'true');
         sessionStorage.setItem('visitToast', 'true');
       }
