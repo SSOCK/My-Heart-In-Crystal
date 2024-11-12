@@ -78,7 +78,7 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
   }
   // 세션 확인
-  const session = await getServerSession();
+  const session = await auth();
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
