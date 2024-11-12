@@ -6,7 +6,7 @@ import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import User from '@/shared/database/mongodb/models/userModel';
 import { User as UserType } from '@/shared/types/user';
-import { ROUTES } from '@/shared/constants/routes';
+import { REVALIDATE_PATHS } from '@/shared/constants/routes';
 
 type CrystalReq = {
   user_id: string;
@@ -59,10 +59,9 @@ export const POST = async (req: NextRequest) => {
       { new: true }
     );
 
-    // 캐시 업데이트
-    revalidatePath(ROUTES.MAIN, 'page');
-    revalidatePath(ROUTES.MAKE, 'page');
-    revalidatePath(ROUTES.VISIT_USER(user_id), 'page');
+    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
+    revalidatePath(REVALIDATE_PATHS.MAKE, 'page');
+    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
     return NextResponse.json({
       message: 'Crystal created',
       crystal_id,

@@ -1,7 +1,7 @@
 'use client';
 
 import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
-import { STEP } from '../[userId]/_constants/step';
+import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 
 const LetterPaper = ({ step }: { step: number }) => {
   const { messageColor, author, message } = use3DModel();

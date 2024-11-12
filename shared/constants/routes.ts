@@ -11,8 +11,16 @@ export const ROUTES = {
 export const BACKEND_ROUTES = {
   NICKNAME: '/api/user/nickname',
   CRYSTAL: '/api/crystal',
-  MESSAGE: '/api/crystal/messages',
+  MESSAGE: '/api/crystal/message',
+  MESSAGES: '/api/crystal/messages',
   ALL_MESSAGES: '/api/user/messages',
   SIGNOUT: '/api/auth/logout',
   VISIT_USER: (id: string) => `/api/user/${id}`,
+} as const;
+
+export const REVALIDATE_PATHS = {
+  MAIN: '/main',
+  MAKE: '/make',
+  VISIT: '/visit/[userId]',
+  NICKNAME: '/nickname',
 } as const;
