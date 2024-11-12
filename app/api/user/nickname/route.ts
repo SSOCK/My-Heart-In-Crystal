@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User from '@/shared/database/mongodb/models/userModel';
+import { revalidatePath } from 'next/cache';
+import { ROUTES } from '@/shared/constants/routes';
+import { User as UserType } from '@/shared/types/user';
 
 type NicknameReq = {
   email: string;
@@ -31,17 +34,21 @@ export const POST = async (req: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const updateUser = await User.findOneAndUpdate(
+    const updateUser = (await User.findOneAndUpdate(
       { email, provider },
       { username },
       { new: true }
-    );
+    )) as UserType;
 
     // 사용자 정보가 없을 경우 처리
     if (!updateUser) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
+    revalidatePath(ROUTES.MAIN, 'page');
+    revalidatePath(ROUTES.MAKE, 'page');
+    revalidatePath(ROUTES.NICKNAME, 'page');
+    revalidatePath(ROUTES.VISIT_USER(updateUser._id), 'page');
     // 성공적으로 업데이트된 경우 응답 반환
     return NextResponse.json({
       message: 'Username updated',

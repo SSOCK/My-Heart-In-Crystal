@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 
 import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import User from '@/shared/database/mongodb/models/userModel';
 import { User as UserType } from '@/shared/types/user';
+import { ROUTES } from '@/shared/constants/routes';
 
 type CrystalReq = {
   user_id: string;
@@ -57,6 +59,10 @@ export const POST = async (req: NextRequest) => {
       { new: true }
     );
 
+    // 캐시 업데이트
+    revalidatePath(ROUTES.MAIN, 'page');
+    revalidatePath(ROUTES.MAKE, 'page');
+    revalidatePath(ROUTES.VISIT_USER(user_id), 'page');
     return NextResponse.json({
       message: 'Crystal created',
       crystal_id,
