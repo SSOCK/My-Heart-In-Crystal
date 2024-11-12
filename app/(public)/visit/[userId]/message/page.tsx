@@ -1,13 +1,17 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
 import { useState, useEffect, Suspense } from 'react';
 
-import dynamic from 'next/dynamic';
-import { use3DModel } from '../store/modelStore';
+import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
 
-const Make = dynamic(() => import('@/app/(public)/visit/_components/Make'), {
-  ssr: false,
-});
+const Make = dynamic(
+  () => import('@/app/(public)/visit/_components/_make/Make'),
+  {
+    ssr: false,
+  }
+);
 
 const VisitMakePage = ({ params }: { params: { userId: string } }) => {
   const [isMounted, setIsMounted] = useState(false);

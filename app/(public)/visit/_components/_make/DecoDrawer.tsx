@@ -12,9 +12,9 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 
-import Decoration from '@/app/(public)/visit/_components/Decoration';
-import ColorButton from '@/app/(public)/visit/_components/ColorButton';
-import MessageForm from '@/app/(public)/visit/_components/MessageForm';
+import DecorationSelect from '@/app/(public)/visit/_components/_make/DecorationSelect';
+import ColorButton from '@/app/(public)/visit/_components/_make/ColorButton';
+import MessageForm from '@/app/(public)/visit/_components/_make/MessageForm';
 import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 import { DECO } from '@/shared/constants/3dModel';
 
@@ -55,7 +55,7 @@ const DecoDrawer = ({ step, userId }: { step: number; userId: string }) => {
 
         <div className="flex w-full overflow-auto">
           {decorationPath.map((deco, index) => (
-            <Decoration key={index} path={deco} />
+            <DecorationSelect key={index} path={deco} />
           ))}
         </div>
 

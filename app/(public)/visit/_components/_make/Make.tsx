@@ -7,11 +7,11 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 
 import UISection from '@/shared/components/ui/UISection';
-import DecoDrawer from '@/app/(public)/visit/_components/DecoDrawer';
-import MakeCanvas from '@/app/(public)/visit/_components/MakeCanvas';
+import DecoDrawer from '@/app/(public)/visit/_components/_make/DecoDrawer';
+import MakeCanvas from '@/app/(public)/visit/_components/_make/MakeCanvas';
 import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 
-import LetterPaper from './LetterPaper';
+import LetterPaper from '@/app/(public)/visit/_components/_make/LetterPaper';
 
 const Make = ({ userId }: { userId: string }) => {
   const router = useRouter();

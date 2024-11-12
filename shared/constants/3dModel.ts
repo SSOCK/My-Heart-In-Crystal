@@ -63,3 +63,7 @@ export const DECO_TYPE = {
   BASE: 'Base',
   BOTTOM: 'Bottom',
 } as const;
+
+export const ETC = {
+  NEW: '/assets/etcs/new.glb',
+} as const;

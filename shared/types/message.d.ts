@@ -22,7 +22,7 @@ export type MessageType = {
   message: string;
   sender: string;
   letterColor: string;
-  messageID: number;
+  messageID: string;
   sendAt: string;
 };
 
