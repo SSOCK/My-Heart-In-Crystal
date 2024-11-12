@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,9 +15,13 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
 
+import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
 import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
+
+import { DECO } from '@/shared/constants/3dModel';
+import clientComponentFetch from '@/shared/utils/fetch/clientComponentFetch';
+import { BACKEND_ROUTES } from '@/shared/constants/routes';
 
 const formSchema = z.object({
   message: z
@@ -29,9 +34,18 @@ const formSchema = z.object({
     .max(10, '10자 이내로 입력해 주세요.'),
 });
 
-const MessageForm = ({ userId, step }: { userId: string; step: number }) => {
+const MessageForm = ({
+  userId,
+  crystalId,
+  step,
+}: {
+  userId: string;
+  crystalId: string;
+  step: number;
+}) => {
   const router = useRouter();
-  const { setMessage, setAuthor } = use3DModel();
+  const { setMessage, setAuthor, model, modelColor, messageColor } =
+    use3DModel();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,11 +54,41 @@ const MessageForm = ({ userId, step }: { userId: string; step: number }) => {
     },
   });
 
-  const onSubmit = (value: z.infer<typeof formSchema>) => {
-    console.log(value);
-    router.replace(`/visit/${userId}`);
-    sessionStorage.setItem('messageIsDecorated', 'true');
-    sessionStorage.setItem('visitToast', 'true');
+  const onSubmit = async (value: z.infer<typeof formSchema>) => {
+    const modelId = Object.values(DECO).find(
+      (deco) => deco.fileName === model
+    )!.id;
+
+    const data = {
+      user_id: userId,
+      crystal_id: crystalId,
+      decoration_id: modelId,
+      decoration_color: modelColor,
+      content: value.message,
+      sender: value.author,
+      letter_color: messageColor,
+      is_deleted: null,
+      is_opend: null,
+    };
+
+    try {
+      const response = await clientComponentFetch(BACKEND_ROUTES.MESSAGE, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        router.replace(`/visit/${userId}`);
+        sessionStorage.setItem('messageIsDecorated', 'true');
+        sessionStorage.setItem('visitToast', 'true');
+      }
+    } catch (error) {
+      console.error('Failed to send message', error);
+      toast.error('메세지 전송에 실패했습니다.');
+    }
   };
 
   return (

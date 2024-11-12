@@ -25,7 +25,7 @@ const Visit = ({ userData }: { userData: UserData }) => {
       sessionStorage.removeItem('visitToast');
     }
   }, []);
-  console.log(userData);
+
   return (
     <>
       <PreviousButton />

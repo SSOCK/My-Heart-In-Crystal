@@ -62,7 +62,7 @@ const Make = ({ userId }: { userId: string }) => {
         </div>
         {step >= STEP.MESSAGE_NOTE_COLOR && <LetterPaper step={step} />}
         <div className="flex w-full flex-col items-center justify-center gap-12">
-          <DecoDrawer step={step} userId={userId} />
+          <DecoDrawer step={step} userId={userId} crystalId="123" />
 
           <div className="flex w-full justify-between md:w-1/2">
             {step > 1 ? (

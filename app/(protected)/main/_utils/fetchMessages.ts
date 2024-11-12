@@ -3,7 +3,7 @@ import clientComponentFetch from '@/shared/utils/fetch/clientComponentFetch';
 
 const fetchMessages = async (crystal_id: string) => {
   try {
-    const response = await clientComponentFetch(BACKEND_ROUTES.MESSAGE, {
+    const response = await clientComponentFetch(BACKEND_ROUTES.MESSAGES, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

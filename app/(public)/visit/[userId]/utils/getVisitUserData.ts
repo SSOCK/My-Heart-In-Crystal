@@ -1,30 +1,20 @@
-import { redirect } from 'next/navigation';
-import { NextRequest, NextResponse } from 'next/server';
-
+import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User from '@/shared/database/mongodb/models/userModel';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import Message from '@/shared/database/mongodb/models/messageModel';
-import { connectToMongoDB } from '@/shared/database/mongodb/config';
-import { ROUTES } from '@/shared/constants/routes';
 import { User as UserType } from '@/shared/types/user';
 import { Crystal as CrystalType } from '@/shared/types/crystal';
 import { Message as MessageType } from '@/shared/types/message';
 import { UserCrystal } from '@/shared/types/userData';
 
-export const GET = async (
-  req: NextRequest,
-  { params }: { params: { userId: string } }
-) => {
-  const { userId } = params;
-
+const getVisitUserData = async (userId: string) => {
   try {
     await connectToMongoDB();
-    // userId is User.uuid
 
     const user = (await User.findOne({ uuid: userId })) as UserType;
-    if (!user) redirect(ROUTES.ERROR);
+    if (!user) return null;
     if ((user && user.crystal_id.length === 0) || user.username === null)
-      redirect(ROUTES.ERROR);
+      return null;
 
     const crystals = (await Promise.all(
       user.crystal_id.map(async (crystalId) => {
@@ -66,8 +56,11 @@ export const GET = async (
       })
     )) as UserCrystal[];
 
-    return NextResponse.json({ user, crystals: crystalWithMessages });
+    return { user, crystals: crystalWithMessages };
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    console.error(error);
+    return null;
   }
 };
+
+export default getVisitUserData;

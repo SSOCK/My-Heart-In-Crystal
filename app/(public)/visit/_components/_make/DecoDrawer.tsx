@@ -18,7 +18,15 @@ import MessageForm from '@/app/(public)/visit/_components/_make/MessageForm';
 import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 import { DECO } from '@/shared/constants/3dModel';
 
-const DecoDrawer = ({ step, userId }: { step: number; userId: string }) => {
+const DecoDrawer = ({
+  step,
+  userId,
+  crystalId,
+}: {
+  step: number;
+  userId: string;
+  crystalId: string;
+}) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -33,7 +41,8 @@ const DecoDrawer = ({ step, userId }: { step: number; userId: string }) => {
   )
     return <ColorButton step={step} />;
 
-  if (step === STEP.MESSAGE) return <MessageForm userId={userId} step={step} />;
+  if (step === STEP.MESSAGE)
+    return <MessageForm userId={userId} crystalId={crystalId} step={step} />;
 
   const decorationArray = Object.values(DECO);
   const decorationPath = decorationArray.map((deco) => deco.fileName);
