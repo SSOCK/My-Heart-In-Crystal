@@ -5,6 +5,7 @@ export const ROUTES = {
   MAKE: '/make',
   VISIT_USER: (id: string) => `/visit/${id}`,
   MESSAGE: (id: string) => `/visit/${id}/message`,
+  ERROR: '/404',
 } as const;
 
 export const BACKEND_ROUTES = {
@@ -12,4 +13,6 @@ export const BACKEND_ROUTES = {
   CRYSTAL: '/api/crystal',
   MESSAGE: '/api/crystal/message',
   ALL_MESSAGES: '/api/user/messages',
+  SIGNOUT: '/api/auth/logout',
+  VISIT_USER: (id: string) => `/api/user/${id}`,
 } as const;

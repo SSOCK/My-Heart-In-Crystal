@@ -1,6 +1,6 @@
 'use client';
 
-import errorIntercept from './errorIntercept';
+import errorInterceptClient from './errorInterceptClient';
 
 const clientComponentFetch = async (url: string, init?: RequestInit) => {
   const defaultInit: RequestInit = {
@@ -15,7 +15,7 @@ const clientComponentFetch = async (url: string, init?: RequestInit) => {
 
   try {
     const res = await fetch(url, finalInit);
-    await errorIntercept(res);
+    await errorInterceptClient(res);
     const data = await res.json();
     return data;
   } catch (error) {

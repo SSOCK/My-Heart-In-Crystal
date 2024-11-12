@@ -1,8 +1,8 @@
 import { signOut } from 'next-auth/react';
 
-const errorIntercept = async (response: Response) => {
+const errorInterceptClient = async (response: Response) => {
   if (!response.ok) {
-    switch (res.status) {
+    switch (response.status) {
       case 400:
         throw new Error('Error 400: Bad Request');
       case 401:
@@ -20,4 +20,4 @@ const errorIntercept = async (response: Response) => {
   }
 };
 
-export default errorIntercept;
+export default errorInterceptClient;
