@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import MessageDecoration from './MessageDecoration';
+import MessageDecoration from '@/app/(public)/visit/_components/_make/MessageDecoration';
 
 const MakeCanvas = () => {
   const [isMounted, setIsMounted] = useState(false);

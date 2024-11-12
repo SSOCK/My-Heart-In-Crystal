@@ -1,19 +1,21 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 
-import CrystalCanvas from '@/shared/components/canvas/CrystalCanvas';
+import CrystalCanvas from '@/app/(public)/visit/_components/CrystalCanvas';
+import MessageCount from '@/app/(public)/visit/_components/MessageCount';
+import ArrowButtons from '@/app/(public)/visit/_components/ArrowButtons';
+
 import UISection from '@/shared/components/ui/UISection';
 import UserHeader from '@/shared/components/ui/UserHeader';
-import MessageCount from '@/app/(public)/visit/_components/MessageCount';
-
 import PreviousButton from '@/shared/components/ui/PreviousButton';
-import ArrowButtons from '../_components/ArrowButtons';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { UserData } from '@/shared/types/userData';
 
-const Visit = ({ userId }: { userId: string }) => {
+import { Button } from '@/components/ui/button';
+
+const Visit = ({ userData }: { userData: UserData }) => {
   useEffect(() => {
     const isMaked = sessionStorage.getItem('visitToast');
 
@@ -28,8 +30,8 @@ const Visit = ({ userId }: { userId: string }) => {
       <PreviousButton />
       <UISection>
         <div className="flex flex-col items-center gap-2">
-          <UserHeader user="김부캠" />
-          <MessageCount count={10} />
+          <UserHeader user={userData.user.username!} />
+          <MessageCount count={userData.crystal.message_id.length} />
         </div>
         <ArrowButtons />
         <Button
@@ -38,12 +40,15 @@ const Visit = ({ userId }: { userId: string }) => {
             sessionStorage.removeItem('messageIsDecorated');
           }}
         >
-          <Link href="/visit/[userId]/message" as={`/visit/${userId}/message`}>
+          <Link
+            href="/visit/[userId]/message"
+            as={`/visit/${userData.user.uuid}/message`}
+          >
             수정구슬 꾸미고 메세지 남기기
           </Link>
         </Button>
       </UISection>
-      <CrystalCanvas />
+      <CrystalCanvas userData={userData} />
     </>
   );
 };

@@ -20,7 +20,8 @@ export const GET = async (
   // userId is User.uuid
   const user = (await User.findOne({ uuid: userId })) as UserType;
   if (!user) redirect(ROUTES.ERROR);
-  if (user && user.crystal_id.length === 0) redirect(ROUTES.ERROR);
+  if ((user && user.crystal_id.length === 0) || user.username === null)
+    redirect(ROUTES.ERROR);
 
   const defaultCrystal = (await Crystal.findOne({
     _id: user.crystal_id[0],

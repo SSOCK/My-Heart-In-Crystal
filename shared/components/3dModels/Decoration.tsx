@@ -15,7 +15,7 @@ interface DecoProps {
   sender: string;
   letterID: number;
   isOpened: boolean;
-  messageID: string;
+  messageID: number;
   sendAt: string;
 }
 

@@ -11,7 +11,13 @@ import InitializeDecoration from '@/app/(protected)/make/_components/InitializeD
 import { use3DModel } from '@/app/(protected)/make/store/modelStore';
 import { DECO_TYPE } from '@/shared/constants/3dModel';
 
-const Decoration = ({ path, type }: { path: string; type: DecorationType }) => {
+const DecorationSelect = ({
+  path,
+  type,
+}: {
+  path: string;
+  type: DecorationType;
+}) => {
   const [isMounted, setIsMounted] = useState(false);
   const { setModel, setBottom } = use3DModel();
 
@@ -49,4 +55,4 @@ const Decoration = ({ path, type }: { path: string; type: DecorationType }) => {
   );
 };
 
-export default Decoration;
+export default DecorationSelect;
