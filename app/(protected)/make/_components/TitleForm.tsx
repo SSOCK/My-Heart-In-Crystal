@@ -30,8 +30,15 @@ const formSchema = z.object({
 const TitleForm = () => {
   const router = useRouter();
   const { update, data: session } = useSession();
-  const { setTitle, title, model, bottom, modelColor, bottomColor } =
-    use3DModel();
+  const {
+    setTitle,
+    title,
+    model,
+    bottom,
+    modelColor,
+    bottomColor,
+    resetModel,
+  } = use3DModel();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,6 +75,7 @@ const TitleForm = () => {
 
       if (response.ok) {
         update({ ...session?.user, crystal_id: response.crystal_id });
+        resetModel();
         router.replace(ROUTES.MAIN);
         sessionStorage.setItem('isDecorated', 'true');
         sessionStorage.setItem('toast', 'true');

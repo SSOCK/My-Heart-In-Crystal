@@ -34,7 +34,9 @@ const formSchema = z.object({
 });
 
 const Nickname = () => {
-  const { data: session, update } = useSession();
+  const { data: session } = useSession();
+  console.log(session);
+
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,7 +49,8 @@ const Nickname = () => {
     const user = session?.user as User;
     const data = {
       username: values.username,
-      userId: user._id,
+      email: user.email,
+      provider: user.provider,
     };
 
     try {
@@ -56,7 +59,6 @@ const Nickname = () => {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        update({ ...session?.user, username: response.username });
         router.replace(ROUTES.MAKE);
       }
     } catch (error) {

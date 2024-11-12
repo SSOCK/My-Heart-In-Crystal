@@ -52,6 +52,11 @@ const CrystalCanvas = ({
           shadow-camera-top={15}
           shadow-camera-bottom={-15}
         />
+        <directionalLight
+          position={[1, 0, 0]}
+          intensity={0.5}
+          color={'#ffffff'}
+        />
         <Raycaster />
         <Glass />
         {Array.from({ length: 100 }, (_, i) => (
