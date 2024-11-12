@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { User } from '@/shared/types/user';
+import { sessionUser } from '@/shared/types/user';
 import { BACKEND_ROUTES, ROUTES } from '@/shared/constants/routes';
 import clientComponentFetch from '@/shared/utils/fetch/clientComponentFetch';
 
@@ -46,7 +46,7 @@ const Nickname = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const user = session?.user as User;
+    const user = session?.user as sessionUser;
     const data = {
       username: values.username,
       email: user.email,

@@ -50,7 +50,7 @@ const Main = ({ userData }: { userData: User }) => {
   return (
     <>
       <PreviousButton />
-      <HamburgerButton />
+      <HamburgerButton userData={userData} />
       <UISection>
         <div className="flex flex-col items-center gap-2">
           <UserHeader user={userData.username || ''} />

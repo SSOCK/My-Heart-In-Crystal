@@ -1,6 +1,5 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 import React from 'react';
@@ -27,15 +26,13 @@ import { User } from '@/shared/types/user';
 import { MAX_CRYSTAL } from '@/shared/constants/enum';
 import MODAL_TYPE from '@/shared/constants/modal';
 
-const HamburgerButton = () => {
+const HamburgerButton = ({ userData }: { userData: User }) => {
   const { onOpen } = useModal();
   const router = useRouter();
-  const { data: session } = useSession();
-  const user = session?.user as User;
 
   const onOpenAllMessage = async () => {
     try {
-      const messages = await fetchAllMessages(user._id);
+      const messages = await fetchAllMessages(userData._id);
       if (messages.length === 0) {
         toast.error('메세지가 없습니다.');
         return;
@@ -73,7 +70,7 @@ const HamburgerButton = () => {
             </Button>
             <Button
               onClick={() => {
-                if (user && user.crystal_id.length >= MAX_CRYSTAL) {
+                if (userData && userData.crystal_id.length >= MAX_CRYSTAL) {
                   toast.error('더 이상 수정구슬을 만들 수 없습니다.');
                   return;
                 }
