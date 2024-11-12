@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getServerSession } from 'next-auth';
+import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import User from '@/shared/database/mongodb/models/userModel';
@@ -17,7 +17,7 @@ type CrystalReq = {
 
 export const POST = async (req: NextRequest) => {
   // 세션 확인
-  const session = await getServerSession();
+  const session = await auth();
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

@@ -18,12 +18,13 @@ import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
 import dynamic from 'next/dynamic';
 import TitleForm from '@/app/(protected)/make/_components/TitleForm';
 import { STEP } from '@/app/(protected)/make/_constants/step';
+import { User } from '@/shared/types/user';
 
 const ColorButton = dynamic(
   () => import('@/app/(protected)/make/_components/ColorButton')
 );
 
-const DecoDrawer = ({ step }: { step: number }) => {
+const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const DecoDrawer = ({ step }: { step: number }) => {
       />
     );
 
-  if (step === STEP.TITLE) return <TitleForm />;
+  if (step === STEP.TITLE) return <TitleForm userData={userData} />;
 
   const mainDecorationArray = Object.values(MAIN_DECORATION);
   const bottomDecorationArray = Object.values(BOTTOM);
