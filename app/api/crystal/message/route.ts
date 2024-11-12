@@ -42,9 +42,9 @@ export const GET = async (req: NextRequest) => {
 
     return NextResponse.json({ data: messageDatas, ok: true });
   } catch (error) {
-    console.error('Error fetching crystal:', error);
+    console.error('Error fetching messages:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch crystal' + error },
+      { error: 'Failed to fetch messages' + error },
       { status: 500 }
     );
   }

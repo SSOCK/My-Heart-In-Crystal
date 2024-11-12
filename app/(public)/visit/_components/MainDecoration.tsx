@@ -7,7 +7,8 @@ import { Mesh, Group, Vector3 } from 'three';
 
 import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
 import { MAIN_DECORATION } from '@/shared/constants/3dModel';
-import { Crystal } from '@/shared/types/crystal';
+
+import { UserCrystal } from '@/shared/types/userData';
 
 const fallingModel = (
   modelRef: Group,
@@ -35,7 +36,7 @@ const fallingModel = (
   }
 };
 
-const MainDecoration = ({ crystal }: { crystal: Crystal }) => {
+const MainDecoration = ({ crystal }: { crystal: UserCrystal }) => {
   const path = Object.values(MAIN_DECORATION).find(
     (deco) => deco.id === crystal.main_decoration_id
   )!.path;
