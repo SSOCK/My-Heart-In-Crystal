@@ -20,9 +20,10 @@ const errorInterceptServer = async (response: Response) => {
       case 403:
         throw new Error('Error 403: Forbidden');
       case 404:
-        redirect(ROUTES.LANDING);
+        redirect(ROUTES.ERROR);
         throw new Error('Error 404: Not Found');
       case 500:
+        redirect(ROUTES.LANDING);
         throw new Error('Error 500: Internal Server Error');
       default:
         throw new Error(`Error ${response.status}: ${response.statusText}`);
