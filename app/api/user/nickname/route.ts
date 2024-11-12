@@ -1,25 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getServerSession } from 'next-auth';
+import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User from '@/shared/database/mongodb/models/userModel';
 
 type NicknameReq = {
+  email: string;
+  provider: string;
   username: string;
-  userId: string;
 };
 
 export const POST = async (req: NextRequest) => {
   // 세션 확인
-  const session = await getServerSession();
+  const session = await auth();
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   // 요청에서 데이터 추출
-  const { username, userId } = (await req.json()) as NicknameReq;
+  const { email, provider, username } = (await req.json()) as NicknameReq;
 
-  if (!username || !userId) {
+  if (!email || !provider) {
     return NextResponse.json(
       { error: 'Username and userId are required' },
       { status: 400 }
@@ -30,22 +31,21 @@ export const POST = async (req: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    // 해당 userId를 가진 사용자의 username 필드를 업데이트
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
+    const updateUser = await User.findOneAndUpdate(
+      { email, provider },
       { username },
-      { new: true } // 업데이트된 사용자 데이터를 반환하도록 설정
+      { new: true }
     );
 
     // 사용자 정보가 없을 경우 처리
-    if (!updatedUser) {
+    if (!updateUser) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     // 성공적으로 업데이트된 경우 응답 반환
     return NextResponse.json({
       message: 'Username updated',
-      username: updatedUser.username,
+      username: updateUser.username,
       ok: true,
     });
   } catch (error) {

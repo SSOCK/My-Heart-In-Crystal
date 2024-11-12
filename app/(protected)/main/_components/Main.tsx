@@ -1,6 +1,7 @@
-import { useRouter } from 'next/navigation';
+'use client';
+
 import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+
 import { useQuery } from '@tanstack/react-query';
 
 import UISection from '@/shared/components/ui/UISection';
@@ -18,31 +19,26 @@ import { User } from '@/shared/types/user';
 import fetchCrystal from '../_utils/fetchCrystal';
 import { Crystal } from '@/shared/types/crystal';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { toast } from 'sonner';
 
-const Main = () => {
-  const [isMounted, setIsMounted] = useState(false);
+const Main = ({ userData }: { userData: User }) => {
   const [current, setCurrent] = useState<number>(0);
-  const { data: session } = useSession();
-  const router = useRouter();
-  const user = session?.user as User;
+
   const { data, isLoading, isError } = useQuery<Crystal[]>({
     queryKey: ['crystal'],
-    queryFn: () => fetchCrystal(user._id),
+    queryFn: () => fetchCrystal(userData._id),
     gcTime: 0,
   });
 
   useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-    }
+    const isMaked = sessionStorage.getItem('toast');
 
-    if (user && user.crystal_id.length === 0) {
-      sessionStorage.removeItem('isDecorated');
-      router.push('/make');
+    if (isMaked) {
+      toast.success('새로운 수정구슬이 생성되었습니다!');
+      sessionStorage.removeItem('toast');
     }
-  }, [router, user, isMounted]);
+  }, []);
 
-  if (!isMounted) return null;
   if (isLoading || isError) return null;
 
   const crystalCount = data?.length;
@@ -57,7 +53,7 @@ const Main = () => {
       <HamburgerButton />
       <UISection>
         <div className="flex flex-col items-center gap-2">
-          <UserHeader user={user.username || ''} />
+          <UserHeader user={userData.username || ''} />
           <MessageCount count={messageCount || 0} />
         </div>
         <div className="flex w-full justify-between md:px-16">
@@ -82,7 +78,7 @@ const Main = () => {
         </div>
         <div className="flex w-full justify-between">
           <FullScreen />
-          <ShareLink userId={user.uuid} />
+          <ShareLink userId={userData.uuid} />
         </div>
       </UISection>
       <CrystalCanvas data={data || []} current={current} />

@@ -48,7 +48,7 @@ const Make = () => {
 
   const handleNext = () => {
     const nextStep = step + 1;
-    router.push(`/make?step=${nextStep}`);
+    router.push(`${ROUTES.MAKE}?step=${nextStep}`);
     setStep(nextStep);
   };
 
