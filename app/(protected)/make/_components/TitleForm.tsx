@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -27,9 +26,9 @@ const formSchema = z.object({
   title: z.string().min(1).max(10),
 });
 
-const TitleForm = () => {
+const TitleForm = ({ userData }: { userData: User }) => {
   const router = useRouter();
-  const { update, data: session } = useSession();
+
   const {
     setTitle,
     title,
@@ -56,9 +55,8 @@ const TitleForm = () => {
       return item.path === bottom;
     })[0].id;
 
-    const user = session?.user as User;
     const data = {
-      user_id: user._id,
+      user_id: userData._id,
       title: title,
       model: modelId,
       modelColor,
@@ -74,7 +72,6 @@ const TitleForm = () => {
       });
 
       if (response.ok) {
-        update({ ...session?.user, crystal_id: response.crystal_id });
         resetModel();
         router.replace(ROUTES.MAIN);
         sessionStorage.setItem('isDecorated', 'true');

@@ -6,23 +6,17 @@ import { ROUTES } from '@/shared/constants/routes';
 
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User, { IUser } from '@/shared/database/mongodb/models/userModel';
-import { User as UserType } from '@/shared/types/user';
+import { sessionUser, User as UserType } from '@/shared/types/user';
 import { createUser } from '@/shared/database/mongodb/actions/userAction';
 
 import Main from './_components/Main';
-
-type user = {
-  name: string;
-  provider: string;
-  email: string;
-};
 
 const getUserData = async () => {
   const session = await auth();
   console.log(session);
 
   if (!session) redirect(ROUTES.LANDING);
-  const user = session.user as user;
+  const user = session.user as sessionUser;
 
   await connectToMongoDB();
 
