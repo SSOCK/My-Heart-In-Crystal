@@ -15,7 +15,13 @@ import Ground from '@/shared/components/3dModels/Ground';
 import Raycaster from '@/shared/components/canvas/Raycaster';
 import { UserData } from '@/shared/types/userData';
 
-const CrystalCanvas = ({ userData }: { userData: UserData }) => {
+const CrystalCanvas = ({
+  userData,
+  current,
+}: {
+  userData: UserData;
+  current: number;
+}) => {
   return (
     <section className="canvas-3d">
       <Canvas
@@ -51,10 +57,10 @@ const CrystalCanvas = ({ userData }: { userData: UserData }) => {
         {Array.from({ length: 100 }, (_, i) => (
           <Snowflake key={i} />
         ))}
-        <Decorations messages={userData.messages} />
-        <MainDecoration crystal={userData.crystal} />
+        <Decorations messages={userData.crystals[current].messages} />
+        <MainDecoration crystal={userData.crystals[current]} />
         <Base />
-        <Bottom crystal={userData.crystal} />
+        <Bottom crystal={userData.crystals[current]} />
         <Ground />
       </Canvas>
     </section>

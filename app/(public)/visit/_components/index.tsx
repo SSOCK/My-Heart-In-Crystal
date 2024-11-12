@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import CrystalCanvas from '@/app/(public)/visit/_components/CrystalCanvas';
@@ -16,6 +16,7 @@ import { UserData } from '@/shared/types/userData';
 import { Button } from '@/components/ui/button';
 
 const Visit = ({ userData }: { userData: UserData }) => {
+  const [current, setCurrent] = useState(0);
   useEffect(() => {
     const isMaked = sessionStorage.getItem('visitToast');
 
@@ -24,16 +25,20 @@ const Visit = ({ userData }: { userData: UserData }) => {
       sessionStorage.removeItem('visitToast');
     }
   }, []);
-
+  console.log(userData);
   return (
     <>
       <PreviousButton />
       <UISection>
         <div className="flex flex-col items-center gap-2">
           <UserHeader user={userData.user.username!} />
-          <MessageCount count={userData.crystal.message_id.length} />
+          <MessageCount count={userData.crystals[current].message_id.length} />
         </div>
-        <ArrowButtons />
+        <ArrowButtons
+          maxIndex={userData.user.crystal_id.length - 1}
+          current={current}
+          handleCurrent={setCurrent}
+        />
         <Button
           className="pointer-events-auto w-full md:w-1/2 xl:w-1/3"
           onClick={() => {
@@ -48,7 +53,7 @@ const Visit = ({ userData }: { userData: UserData }) => {
           </Link>
         </Button>
       </UISection>
-      <CrystalCanvas userData={userData} />
+      <CrystalCanvas userData={userData} current={current} />
     </>
   );
 };

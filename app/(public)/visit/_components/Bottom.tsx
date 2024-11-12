@@ -5,7 +5,8 @@ import { useGLTF } from '@react-three/drei';
 
 import { BOTTOM } from '@/shared/constants/3dModel';
 import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
-import { Crystal } from '@/shared/types/crystal';
+
+import { UserCrystal } from '@/shared/types/userData';
 
 const makeCanvasTexture = ({
   width,
@@ -51,7 +52,7 @@ const makeCanvasTexture = ({
   return new CanvasTexture(canvas);
 };
 
-const Bottom = ({ crystal }: { crystal: Crystal }) => {
+const Bottom = ({ crystal }: { crystal: UserCrystal }) => {
   const path = Object.values(BOTTOM).find(
     (deco) => deco.id === crystal.bottom_decoration_id
   )!.path;
