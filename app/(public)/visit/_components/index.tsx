@@ -14,6 +14,7 @@ import PreviousButton from '@/shared/components/ui/PreviousButton';
 import { UserData } from '@/shared/types/userData';
 
 import { Button } from '@/components/ui/button';
+import { ROUTES } from '@/shared/constants/routes';
 
 const Visit = ({ userData }: { userData: UserData }) => {
   const [current, setCurrent] = useState(0);
@@ -47,7 +48,7 @@ const Visit = ({ userData }: { userData: UserData }) => {
         >
           <Link
             href="/visit/[userId]/message"
-            as={`/visit/${userData.user.uuid}/message`}
+            as={ROUTES.MESSAGE(userData.user.uuid, String(current))}
           >
             수정구슬 꾸미고 메세지 남기기
           </Link>

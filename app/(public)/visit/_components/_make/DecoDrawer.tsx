@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 import { useState, useEffect } from 'react';
 import { ArrowLeftRight } from 'lucide-react';
 
@@ -21,11 +23,13 @@ import { DECO } from '@/shared/constants/3dModel';
 const DecoDrawer = ({
   step,
   userId,
+  uuid,
   crystalId,
 }: {
   step: number;
-  userId: string;
-  crystalId: string;
+  userId: string | mongoose.Schema.Types.ObjectId;
+  uuid: string;
+  crystalId: string | mongoose.Schema.Types.ObjectId;
 }) => {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -42,7 +46,14 @@ const DecoDrawer = ({
     return <ColorButton step={step} />;
 
   if (step === STEP.MESSAGE)
-    return <MessageForm userId={userId} crystalId={crystalId} step={step} />;
+    return (
+      <MessageForm
+        userId={userId}
+        uuid={uuid}
+        crystalId={crystalId}
+        step={step}
+      />
+    );
 
   const decorationArray = Object.values(DECO);
   const decorationPath = decorationArray.map((deco) => deco.fileName);

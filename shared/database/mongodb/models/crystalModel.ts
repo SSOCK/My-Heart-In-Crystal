@@ -3,14 +3,14 @@ import Message from '@/shared/database/mongodb/models/messageModel';
 
 // Crystal 인터페이스 정의
 export interface ICrystal {
-  user_id: mongoose.Schema.Types.ObjectId;
+  user_id: mongoose.Schema.Types.ObjectId | string;
   title: string;
   is_private: Date | null;
   main_decoration_color: string;
   main_decoration_id: number;
   bottom_decoration_color: string;
   bottom_decoration_id: number;
-  message_id: mongoose.Schema.Types.ObjectId[] | [];
+  message_id: mongoose.Schema.Types.ObjectId[] | string[] | [];
 }
 
 // ICrystal과 Document 인터페이스를 결합하여 MongoDB 문서의 타입 정의
