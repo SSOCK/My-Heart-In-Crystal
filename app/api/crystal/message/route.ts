@@ -116,6 +116,12 @@ export const POST = async (req: NextRequest) => {
       is_deleted,
       is_opend,
     });
+    if (!message) {
+      return NextResponse.json(
+        { error: 'Failed to create message' },
+        { status: 500 }
+      );
+    }
 
     const message_id = message._id;
 
@@ -131,6 +137,14 @@ export const POST = async (req: NextRequest) => {
       },
       { new: true }
     );
+
+    if (!message) {
+      await Message.findOneAndDelete({ _id: message_id });
+      return NextResponse.json(
+        { error: 'Failed to update crystal' },
+        { status: 500 }
+      );
+    }
 
     // 캐시 업데이트
     revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
