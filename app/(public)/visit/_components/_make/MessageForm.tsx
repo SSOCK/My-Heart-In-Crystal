@@ -89,6 +89,7 @@ const MessageForm = ({
         router.replace(`/visit/${uuid}`);
         sessionStorage.setItem('messageIsDecorated', 'true');
         sessionStorage.setItem('visitToast', 'true');
+        router.refresh();
       }
     } catch (error) {
       console.error('Failed to send message', error);
