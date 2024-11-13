@@ -10,7 +10,10 @@ export interface IUser {
 }
 
 // IUser와 Document 인터페이스를 결합하여 MongoDB 문서의 타입 정의
-export interface IUserDocument extends IUser, Document {}
+export interface IUserDocument extends IUser, Document {
+  createdAt: string;
+  updatedAt: string;
+}
 
 // User 스키마 정의
 const userSchema = new mongoose.Schema<IUserDocument>(

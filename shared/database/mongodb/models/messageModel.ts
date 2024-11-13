@@ -14,7 +14,10 @@ export interface IMessage {
 }
 
 // IMessage와 Document 인터페이스를 결합하여 MongoDB 문서의 타입 정의
-export interface IMessageDocument extends IMessage, Document {}
+export interface IMessageDocument extends IMessage, Document {
+  createdAt: string;
+  updatedAt: string;
+}
 
 // Message 스키마 정의
 const messageSchema = new mongoose.Schema<IMessageDocument>(
