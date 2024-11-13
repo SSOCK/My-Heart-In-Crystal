@@ -11,7 +11,7 @@ export const createUser = async (userData: IUser) => {
     newUser.save();
     return newUser.toString();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw { message: 'error creating user' };
   }
 };

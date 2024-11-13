@@ -13,7 +13,6 @@ import Main from './_components/Main';
 
 const getUserData = async () => {
   const session = await auth();
-  console.log(session);
 
   if (!session) redirect(ROUTES.LANDING);
   const user = session.user as sessionUser;

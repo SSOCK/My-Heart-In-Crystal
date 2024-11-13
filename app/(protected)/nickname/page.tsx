@@ -35,7 +35,6 @@ const formSchema = z.object({
 
 const Nickname = () => {
   const { data: session } = useSession();
-  console.log(session);
 
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({

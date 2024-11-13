@@ -14,7 +14,7 @@ export const createMessage = async (messageData: IMessage) => {
     newMessage.save();
     return newMessage.toString();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw { message: 'error creating message' };
   }
 };

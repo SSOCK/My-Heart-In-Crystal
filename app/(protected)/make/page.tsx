@@ -9,7 +9,6 @@ import Make from '@/app/(protected)/make/_components';
 
 const getUserData = async () => {
   const session = await auth();
-  console.log(session);
 
   if (!session) return null;
   const user = session.user as sessionUser;
