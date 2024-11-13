@@ -4,8 +4,14 @@ import { ModalType } from '@/shared/constants/modal';
 import { MessageType } from '@/shared/types/message';
 import { Message } from '@/shared/types/message';
 
+export type Private = {
+  is_private: boolean;
+  crystal_id: string;
+  handlePrivate: () => void;
+};
+
 type ModalProps = {
-  data?: Message[] | MessageType;
+  data?: Message[] | MessageType | Private;
 };
 
 interface ModalStore {

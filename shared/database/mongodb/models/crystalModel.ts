@@ -14,7 +14,10 @@ export interface ICrystal {
 }
 
 // ICrystal과 Document 인터페이스를 결합하여 MongoDB 문서의 타입 정의
-export interface ICrystalDocument extends ICrystal, Document {}
+export interface ICrystalDocument extends ICrystal, Document {
+  createdAt: string;
+  updatedAt: string;
+}
 
 // Crystal 스키마 정의
 const crystalSchema = new mongoose.Schema<ICrystalDocument>(

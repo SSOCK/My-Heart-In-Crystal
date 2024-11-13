@@ -8,6 +8,33 @@ import User from '@/shared/database/mongodb/models/userModel';
 import { User as UserType } from '@/shared/types/user';
 import { REVALIDATE_PATHS } from '@/shared/constants/routes';
 
+export const PATCH = async (req: NextRequest) => {
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  try {
+    const { crystal_id, is_private } = await req.json();
+    await connectToMongoDB();
+
+    await Crystal.findOneAndUpdate(
+      { _id: crystal_id },
+      { is_private },
+      { new: true }
+    );
+
+    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
+    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
+    return NextResponse.json({ message: 'Crystal updated', ok: true });
+  } catch (error) {
+    console.error('Error updating crystal:', error);
+    return NextResponse.json(
+      { error: 'Failed to update crystal' + error },
+      { status: 500 }
+    );
+  }
+};
+
 type CrystalReq = {
   user_id: string;
   title: string;
@@ -24,14 +51,13 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // 요청에서 데이터 추출
-  const { user_id, title, model, modelColor, bottom, bottomColor } =
-    (await req.json()) as CrystalReq;
-
-  // MongoDB에 연결
-  await connectToMongoDB();
-
   try {
+    // 요청에서 데이터 추출
+    const { user_id, title, model, modelColor, bottom, bottomColor } =
+      (await req.json()) as CrystalReq;
+
+    // MongoDB에 연결
+    await connectToMongoDB();
     // Crystal 생성
     const crystal = await Crystal.create({
       user_id,

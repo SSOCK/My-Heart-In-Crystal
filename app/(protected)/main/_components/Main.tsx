@@ -1,25 +1,24 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import { useQuery } from '@tanstack/react-query';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+
+import { toast } from 'sonner';
 
 import UISection from '@/shared/components/ui/UISection';
 import PreviousButton from '@/shared/components/ui/PreviousButton';
 import UserHeader from '@/shared/components/ui/UserHeader';
 import MessageCount from '@/shared/components/ui/MessageCount';
+import type { User } from '@/shared/types/user';
+import type { Crystal } from '@/shared/types/crystal';
 
 import CrystalCanvas from '@/app/(protected)/main/_components/CrystalCanvas';
 import ShareLink from '@/app/(protected)/main/_components/ui/ShareLink';
 import FullScreen from '@/app/(protected)/main/_components/ui/FullScreen';
 import HamburgerButton from '@/app/(protected)/main/_components/ui/HamburgerButton';
-
-import { User } from '@/shared/types/user';
-
-import fetchCrystal from '../_utils/fetchCrystal';
-import { Crystal } from '@/shared/types/crystal';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { toast } from 'sonner';
+import fetchCrystal from '@/app/(protected)/main/_utils/fetchCrystal';
+import PrivateButton from '@/app/(protected)/main/_components/ui/PrivateButton';
 
 const Main = ({ userData }: { userData: User }) => {
   const [current, setCurrent] = useState<number>(0);
@@ -40,9 +39,10 @@ const Main = ({ userData }: { userData: User }) => {
   }, []);
 
   if (isLoading || isError) return null;
+  if (!data) return null;
 
-  const crystalCount = data?.length;
-  const messageCount = data?.reduce(
+  const crystalCount = data.length;
+  const messageCount = data.reduce(
     (acc, cur) => acc + cur.message_id.length,
     0
   );
@@ -54,7 +54,8 @@ const Main = ({ userData }: { userData: User }) => {
       <UISection>
         <div className="flex flex-col items-center gap-2">
           <UserHeader user={userData.username || ''} />
-          <MessageCount count={messageCount || 0} />
+          <MessageCount count={messageCount} />
+          <PrivateButton crystal={data[current]} />
         </div>
         <div className="flex w-full justify-between md:px-16">
           {current > 0 ? (
