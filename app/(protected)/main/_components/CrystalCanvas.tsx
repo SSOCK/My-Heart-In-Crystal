@@ -6,13 +6,13 @@ import { OrbitControls } from '@react-three/drei';
 import MainDecoration from '@/app/(protected)/main/_components/MainDecoration';
 import Bottom from '@/app/(protected)/main/_components/Bottom';
 import Decorations from '@/app/(protected)/main/_components/Decorations';
+import Raycaster from '@/app/(protected)/main/_components/Raycaster';
 
 import Base from '@/shared/components/3dModels/Base';
 import Glass from '@/shared/components/3dModels/Glass';
 import Snowflake from '@/shared/components/3dModels/Snowflake';
 import Ground from '@/shared/components/3dModels/Ground';
 
-import Raycaster from '@/shared/components/canvas/Raycaster';
 import { Crystal } from '@/shared/types/crystal';
 
 const CrystalCanvas = ({
