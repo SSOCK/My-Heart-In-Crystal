@@ -33,23 +33,7 @@ const Decorations = ({ crystal }: { crystal: Crystal['_id'] }) => {
     />
   ));
 
-  // const center = new Vector3(0, RADIUS / 2, 0);
-  // const emojis = messageList.map((message, index) => (
-  //   <Emoji
-  //     key={index}
-  //     centerPosition={center}
-  //     rangeRadius={RADIUS}
-  //     sentiment={message.sentiment}
-  //     confidence={message.confidence}
-  //   />
-  // ));
-
-  return (
-    <>
-      {/* {emojis} */}
-      {decos}
-    </>
-  );
+  return <>{decos}</>;
 };
 
 export default Decorations;

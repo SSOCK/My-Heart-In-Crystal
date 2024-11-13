@@ -4,6 +4,7 @@ import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import { Crystal as CrystalType } from '@/shared/types/crystal';
+import Message from '@/shared/database/mongodb/models/messageModel';
 
 export const GET = async (req: NextRequest) => {
   const crystalId = req.headers.get('X-Crystal-Id');
@@ -20,10 +21,10 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // MongoDB에 연결
-  await connectToMongoDB();
-
   try {
+    // MongoDB에 연결
+    await connectToMongoDB();
+
     const messages = (
       (await Crystal.findOne({ _id: crystalId }).select(
         'message_id'
@@ -36,7 +37,7 @@ export const GET = async (req: NextRequest) => {
 
     const messageDatas = await Promise.all(
       messages.map(async (messageId) => {
-        return await Crystal.findOne({ _id: messageId });
+        return await Message.findOne({ _id: messageId });
       })
     );
 

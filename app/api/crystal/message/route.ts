@@ -87,3 +87,40 @@ export const POST = async (req: NextRequest) => {
     );
   }
 };
+
+export const PATCH = async (req: NextRequest) => {
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const { messageId, date } = await req.json();
+
+  try {
+    // MongoDB에 연결
+    await connectToMongoDB();
+
+    // Message 수정
+    await Message.findOneAndUpdate(
+      { _id: messageId },
+      {
+        is_opend: date,
+      },
+      { new: true }
+    );
+
+    // 캐시 업데이트
+    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
+    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
+    return NextResponse.json({
+      message: 'Message updated',
+      ok: true,
+    });
+  } catch (error) {
+    console.error('Error updating message : ', error);
+    return NextResponse.json(
+      { error: 'Failed to update message ' + error },
+      { status: 500 }
+    );
+  }
+};
