@@ -13,7 +13,7 @@ export const createCrystal = async (crystalData: ICrystal) => {
     newCrystal.save();
     return newCrystal.toString();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw { message: 'error creating crystal' };
   }
 };

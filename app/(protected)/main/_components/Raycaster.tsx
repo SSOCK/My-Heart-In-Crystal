@@ -59,7 +59,7 @@ const Raycaster = () => {
       // 씬의 모든 객체들과 교차점 계산
       const intersects = raycaster.intersectObjects(scene.children, true);
       if (intersects.length < 1) return;
-      console.log(intersects);
+
       if (intersects[0].object.name === 'glass') {
         isAnimating.current = true;
         isClickedRef.current = true;

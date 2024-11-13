@@ -78,7 +78,7 @@ const TitleForm = ({ userData }: { userData: User }) => {
         sessionStorage.setItem('toast', 'true');
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
