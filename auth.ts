@@ -4,7 +4,7 @@ import Google from 'next-auth/providers/google';
 import Kakao from 'next-auth/providers/kakao';
 import Naver from 'next-auth/providers/naver';
 
-export const { auth, handlers, signIn, signOut, update } = NextAuth({
+export const { auth, handlers, signIn, signOut, unstable_update } = NextAuth({
   providers: [
     Naver({
       clientId: process.env.NAVER_CLIENT_ID || '',
