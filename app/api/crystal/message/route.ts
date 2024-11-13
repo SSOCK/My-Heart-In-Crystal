@@ -8,6 +8,68 @@ import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import Message from '@/shared/database/mongodb/models/messageModel';
 import { REVALIDATE_PATHS } from '@/shared/constants/routes';
 
+export const DELETE = async (req: NextRequest) => {
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    const { messageId, date } = await req.json();
+
+    // MongoDB에 연결
+    await connectToMongoDB();
+
+    // Message 삭제
+    const message = await Message.findOneAndUpdate(
+      { _id: messageId },
+      {
+        is_deleted: date,
+      },
+      { new: true }
+    );
+    if (!message) {
+      return NextResponse.json({ error: 'Message not found' }, { status: 404 });
+    }
+
+    // crystal_id 배열에서 message_id 삭제
+    const crystal = await Crystal.findOneAndUpdate(
+      { message_id: messageId },
+      {
+        $pull: {
+          message_id: messageId,
+        },
+      },
+      { new: true }
+    );
+
+    if (!crystal) {
+      await Message.findOneAndUpdate(
+        { _id: messageId },
+        {
+          is_deleted: null,
+        },
+        { new: true }
+      );
+      return NextResponse.json({ error: 'Crystal not found' }, { status: 404 });
+    }
+
+    // 캐시 업데이트
+    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
+    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
+    return NextResponse.json({
+      message: 'Message deleted',
+      ok: true,
+    });
+  } catch (error) {
+    console.error('Error deleting message : ', error);
+    return NextResponse.json(
+      { error: 'Failed to delete message ' + error },
+      { status: 500 }
+    );
+  }
+};
+
 type MessageReq = {
   user_id: string;
   crystal_id: string;

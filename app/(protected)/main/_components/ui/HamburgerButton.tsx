@@ -12,6 +12,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 
@@ -61,13 +62,14 @@ const HamburgerButton = ({ userData }: { userData: User }) => {
             </SheetDescription>
           </SheetHeader>
           <div className="flex w-full flex-col gap-2">
-            <Button
+            <SheetClose
+              className="rounded-md bg-primary px-4 py-2 text-white"
               onClick={() => {
                 onOpenAllMessage();
               }}
             >
               모든 편지 보기
-            </Button>
+            </SheetClose>
             <Button
               onClick={() => {
                 if (userData && userData.crystal_id.length >= MAX_CRYSTAL) {

@@ -15,6 +15,7 @@ import MODAL_TYPE from '@/shared/constants/modal';
 
 import DeleteModal from '@/shared/components/modals/DeleteModal';
 import { Message } from '@/shared/types/message';
+import { formattedTime } from '@/shared/utils/time/formattedTime';
 
 const MessageListModal = () => {
   const { isOpen, onClose, type, props } = useModal();
@@ -42,10 +43,10 @@ const MessageListModal = () => {
               style={{ backgroundColor: message.letter_color }}
               className="p-4"
             >
-              <div>{message.createdAt}</div>
+              <div>{formattedTime(message.createdAt)}</div>
               <div>{message.content}</div>
               <div>From . {message.sender}</div>
-              <DeleteModal />
+              <DeleteModal messageId={message._id} />
             </div>
           ))}
         </div>
