@@ -19,9 +19,11 @@ import FullScreen from '@/app/(protected)/main/_components/ui/FullScreen';
 import HamburgerButton from '@/app/(protected)/main/_components/ui/HamburgerButton';
 import fetchCrystal from '@/app/(protected)/main/_utils/fetchCrystal';
 import PrivateButton from '@/app/(protected)/main/_components/ui/PrivateButton';
+import { use3DModel } from '@/app/(protected)/make/store/modelStore';
 
 const Main = ({ userData }: { userData: User }) => {
   const [current, setCurrent] = useState<number>(0);
+  const { resetModel } = use3DModel();
 
   const { data, isLoading, isError } = useQuery<Crystal[]>({
     queryKey: ['crystal'],
@@ -33,6 +35,7 @@ const Main = ({ userData }: { userData: User }) => {
     const isMaked = sessionStorage.getItem('toast');
 
     if (isMaked) {
+      resetModel();
       toast.success('새로운 수정구슬이 생성되었습니다!');
       sessionStorage.removeItem('toast');
     }
