@@ -105,8 +105,13 @@ html::-webkit-scrollbar {
 }
 
 .previous {
-  width: 2rem !important;
-  height: 2rem !important;
+  @apply transform transition duration-200;
+  width: 3rem;
+  height: 3rem;
+}
+
+.previous:hover {
+  @apply text-yellow-300;
 }
 
 .user-header {
