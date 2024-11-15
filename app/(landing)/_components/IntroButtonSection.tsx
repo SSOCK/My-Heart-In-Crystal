@@ -26,13 +26,13 @@ const IntroButtonSection = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <Button
-        className="pointer-events-auto"
+        className="pointer-events-auto w-[10rem]"
         onClick={() => onOpen(MODAL_TYPE.INTRODUCE)}
       >
-        소개
+        서비스 자세히 보기
       </Button>
       <Drawer>
-        <DrawerTrigger className="pointer-events-auto rounded bg-primary p-2 px-4 text-sm text-white">
+        <DrawerTrigger className="pointer-events-auto w-[10rem] rounded bg-primary p-2 px-4 text-sm text-white">
           시작하기
         </DrawerTrigger>
         <DrawerContent className="border-none bg-primary p-4">
@@ -43,7 +43,7 @@ const IntroButtonSection = () => {
           <div className="flex w-full flex-col items-center justify-center gap-4">
             <Button
               onClick={() => signIn('naver', { callbackUrl: ROUTES.MAIN })}
-              className="w-1/2 border-none md:w-1/3"
+              className="w-2/3 border-none md:w-1/3"
               variant="outline"
               style={{ backgroundColor: '#03C75A' }}
             >
@@ -57,7 +57,7 @@ const IntroButtonSection = () => {
             </Button>
             <Button
               onClick={() => signIn('kakao', { callbackUrl: ROUTES.MAIN })}
-              className="w-1/2 border-none md:w-1/3"
+              className="w-2/3 border-none md:w-1/3"
               variant="outline"
               style={{ backgroundColor: '#FEE500' }}
             >
@@ -72,7 +72,7 @@ const IntroButtonSection = () => {
             {check ? (
               <Button
                 onClick={() => signIn('google', { callbackUrl: ROUTES.MAIN })}
-                className="w-1/2 border-none hover:bg-white md:w-1/3"
+                className="w-2/3 border-none hover:bg-white md:w-1/3"
                 variant="outline"
               >
                 <Image
