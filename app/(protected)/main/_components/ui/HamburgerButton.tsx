@@ -49,7 +49,7 @@ const HamburgerButton = ({ userData }: { userData: User }) => {
       <Sheet>
         <SheetTrigger asChild>
           <Menu
-            className="pointer-events-auto fixed h-12 w-12 items-center justify-center rounded-full bg-transparent p-2 hover:text-blue-400"
+            className="pointer-events-auto fixed h-12 w-12 items-center justify-center rounded-full bg-transparent p-2 text-gray-100 hover:text-blue-400"
             style={{ cursor: 'pointer', zIndex: 1, top: '2rem', right: '2rem' }}
           />
         </SheetTrigger>
@@ -58,10 +58,10 @@ const HamburgerButton = ({ userData }: { userData: User }) => {
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <SheetHeader className="py-4">
-            <SheetTitle className="text-gray-100">
-              {userData.username}
+            <SheetTitle className="flex justify-center gap-2 text-gray-100">
+              <p className="text-yellow-200">{userData.username}</p> 님
             </SheetTitle>
-            <SheetDescription>
+            <SheetDescription className="text-green-300">
               나의 수정구슬 {userData.crystal_id.length}개
             </SheetDescription>
             <SheetDescription>
