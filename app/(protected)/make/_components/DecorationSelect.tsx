@@ -46,7 +46,7 @@ const DecorationSelect = ({
           <ambientLight intensity={1} color={'#ffffff'} />
           <directionalLight
             position={[10, 20, 10]}
-            intensity={1.5}
+            intensity={0.7}
             color={'#ffffff'}
           />
           <InitializeDecoration path={path} type={type} />
