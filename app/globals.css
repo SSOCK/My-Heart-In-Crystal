@@ -115,7 +115,12 @@ html::-webkit-scrollbar {
 }
 
 .user-header {
-  @apply text-2xl font-bold text-green-800;
+  @apply text-2xl font-bold text-green-600;
+  text-shadow:
+    -1px 0px black,
+    0px 1px black,
+    1px 0px black,
+    0px -1px black;
 }
 
 .ui-section {
