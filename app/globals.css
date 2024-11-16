@@ -162,7 +162,7 @@ html::-webkit-scrollbar {
 }
 
 .letter-paper {
-  height: 20rem;
+  min-height: 20rem;
   border: none;
   resize: none;
   outline: none;

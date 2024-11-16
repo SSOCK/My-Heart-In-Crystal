@@ -1,6 +1,6 @@
 'use client';
 
-import { CircleX } from 'lucide-react';
+import { MailX } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -50,15 +50,15 @@ const DeleteModal = ({ messageId }: { messageId: string }) => {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <CircleX className="message-close cursor-pointer" />
+      <DialogTrigger className="flex w-full justify-end">
+        <MailX className="message-close cursor-pointer" />
       </DialogTrigger>
       <DialogContent
-        className="no-scrollbar"
+        className="no-scrollbar border-none bg-primary"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader className="flex flex-col items-center justify-center gap-4">
-          <DialogTitle>메세지 삭제</DialogTitle>
+          <DialogTitle className="text-xl text-white">메세지 삭제</DialogTitle>
           <DialogDescription>
             정말로 삭제하시겠습니까? 삭제된 메세지는 복구하기 어려울 수
             있습니다.
