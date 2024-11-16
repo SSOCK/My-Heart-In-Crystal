@@ -41,8 +41,8 @@ const DecorationSelect = ({
       onClick={() => handleModel()}
       style={{ width: '18rem', height: '18rem' }}
     >
-      <Canvas style={{ width: '100%', height: '100%' }}>
-        <Suspense fallback={Loading()}>
+      <Suspense fallback={Loading()}>
+        <Canvas style={{ width: '100%', height: '100%' }}>
           <ambientLight intensity={1} color={'#ffffff'} />
           <directionalLight
             position={[10, 20, 10]}
@@ -50,8 +50,8 @@ const DecorationSelect = ({
             color={'#ffffff'}
           />
           <InitializeDecoration path={path} type={type} />
-        </Suspense>
-      </Canvas>
+        </Canvas>
+      </Suspense>
     </DrawerClose>
   );
 };
