@@ -88,7 +88,7 @@ const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
         </div>
 
         <DrawerFooter>
-          <DrawerClose className="mb-8 transform rounded-lg  bg-gray-200 p-2 px-4 transition duration-200 hover:bg-gray-300">
+          <DrawerClose className="mb-8 transform rounded-lg  bg-gray-200 p-2 px-8 transition duration-200 hover:bg-gray-300">
             닫기
           </DrawerClose>
         </DrawerFooter>

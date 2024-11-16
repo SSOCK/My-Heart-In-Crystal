@@ -40,18 +40,21 @@ const MessageListModal = () => {
           {messageLists.map((message, index) => (
             <>
               <div
-                key={index}
+                key={index + message._id}
                 style={{
                   backgroundColor: message.letter_color,
-                  minHeight: '10rem',
                 }}
                 className="message flex flex-col justify-between rounded-lg p-4"
               >
                 <div>
                   <DeleteModal messageId={message._id} />
                   <div
-                    className="text-center text-2xl text-white"
+                    className="text-2xl text-white"
                     style={{
+                      paddingTop: '2rem',
+                      paddingBottom: '2rem',
+                      paddingLeft: '1rem',
+                      paddingRight: '1rem',
                       textShadow:
                         '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
                     }}
@@ -61,19 +64,9 @@ const MessageListModal = () => {
                     ))}
                   </div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-col justify-between gap-1">
                   <div
-                    className="text-xl"
-                    style={{
-                      color: 'rgba(254, 202, 202, 1)',
-                      textShadow:
-                        '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
-                    }}
-                  >
-                    {formattedTime(message.createdAt)}
-                  </div>
-                  <div
-                    className="flex gap-2 text-xl"
+                    className="flex justify-end gap-2 text-xl md:justify-start"
                     style={{
                       color: 'rgba(34,197,94,1)',
                       textShadow:
@@ -82,6 +75,16 @@ const MessageListModal = () => {
                   >
                     <p style={{ color: 'rgba(156, 163, 175, 1)' }}>From . </p>
                     {message.sender}
+                  </div>
+                  <div
+                    className="flex justify-end text-xl"
+                    style={{
+                      color: 'rgba(254, 202, 202, 1)',
+                      textShadow:
+                        '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
+                    }}
+                  >
+                    {formattedTime(message.createdAt)}
                   </div>
                 </div>
               </div>

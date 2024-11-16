@@ -54,7 +54,7 @@ const DeleteModal = ({ messageId }: { messageId: string }) => {
         <MailX className="message-close cursor-pointer" />
       </DialogTrigger>
       <DialogContent
-        className="no-scrollbar border-none bg-primary"
+        className="no-scrollbar rounded-lg border-none bg-primary"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader className="flex flex-col items-center justify-center gap-4">
@@ -71,13 +71,13 @@ const DeleteModal = ({ messageId }: { messageId: string }) => {
               await fetchDeleteMessage();
               onClose();
             }}
-            className="rounded-md px-4 py-2"
+            className="rounded-md px-8 py-2"
             style={{ backgroundColor: '#FF4D4F', color: 'white' }}
           >
             삭제
           </DialogClose>
 
-          <DialogClose className="rounded-md bg-gray-300 px-4 py-2">
+          <DialogClose className="rounded-md bg-gray-50 px-8 py-2">
             취소
           </DialogClose>
         </DialogFooter>

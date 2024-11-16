@@ -29,7 +29,7 @@ const MessageModal = () => {
   return (
     <Dialog open={isOpen}>
       <DialogContent
-        className="no-scrollbar message"
+        className="no-scrollbar message rounded-lg"
         style={{ backgroundColor: letterColor }}
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
@@ -45,7 +45,7 @@ const MessageModal = () => {
           }}
         >
           {message.split('\n').map((line, index) => (
-            <p key={index} className="text-xl">
+            <p key={index} className="text-2xl">
               {line}
             </p>
           ))}
@@ -60,7 +60,7 @@ const MessageModal = () => {
           style={{ display: 'flex', justifyContent: 'space-between' }}
         >
           <div
-            className="text-xl"
+            className="flex justify-end text-xl"
             style={{
               color: 'rgba(254, 202, 202, 1)',
               textShadow:
@@ -70,7 +70,7 @@ const MessageModal = () => {
             {formattedTime(sendAt)}
           </div>
           <div
-            className="flex gap-2 text-xl"
+            className="flex justify-end gap-2 text-xl"
             style={{
               color: 'rgba(34,197,94,1)',
               textShadow:
