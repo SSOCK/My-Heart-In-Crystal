@@ -22,7 +22,7 @@ const PreviousButton = () => {
       onClick={() => {
         view && onOut();
       }}
-      className="previous pointer-events-auto fixed flex h-12 w-12 items-center justify-center rounded-full bg-transparent p-2 hover:bg-primary hover:text-yellow-300"
+      className="previous pointer-events-auto fixed flex h-12 w-12 items-center justify-center rounded-full bg-transparent p-2 text-gray-100 hover:bg-primary hover:text-yellow-400"
       style={{ zIndex: 1, top: '3rem', left: '3rem' }}
     >
       <CircleArrowLeft size={'2rem'} />
