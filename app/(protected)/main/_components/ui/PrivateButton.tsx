@@ -23,7 +23,7 @@ const PrivateButton = ({ crystal }: { crystal: Crystal }) => {
           data: { is_private: current, crystal_id: crystal._id, handlePrivate },
         });
       }}
-      className="transfrom pointer-events-auto rounded-full p-2 transition duration-200 hover:bg-gray-300"
+      className="transfrom pointer-events-auto rounded-full p-2 text-white transition duration-200 hover:bg-gray-300 hover:text-primary"
     >
       {current ? <LockKeyhole /> : <LockKeyholeOpen />}
     </button>
