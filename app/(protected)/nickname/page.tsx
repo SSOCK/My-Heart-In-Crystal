@@ -55,9 +55,9 @@ const Nickname = () => {
   });
 
   useEffect(() => {
-    // if (!session) {
-    //   router.replace(ROUTES.LANDING);
-    // }
+    if (!session) {
+      router.replace(ROUTES.LANDING);
+    }
 
     return () => {
       setCheck(false);
