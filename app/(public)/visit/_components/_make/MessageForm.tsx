@@ -57,14 +57,15 @@ const MessageForm = ({
     model,
     modelColor,
     messageColor,
-    message,
+
     author,
     resetModel,
   } = use3DModel();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      message,
+      message: '',
       author,
     },
   });
@@ -134,7 +135,7 @@ const MessageForm = ({
                 <Textarea
                   disabled={step === STEP.MESSAGE_NOTE_COLOR}
                   className="no-scrollbar w-4/5 p-4 md:w-1/3"
-                  placeholder="따뜻한 마음을 담아 메세지를 작성해 주세요."
+                  placeholder="이곳에 따뜻한 마음을 담아 메세지를 작성해 주세요."
                   {...field}
                   onChange={(e) => {
                     const value = e.target.value;
