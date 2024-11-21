@@ -108,7 +108,7 @@ const Make = ({
           </div>
         </div>
       </UISection>
-      <MakeCanvas />
+      <MakeCanvas step={step} />
     </>
   );
 };
