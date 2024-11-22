@@ -6,7 +6,7 @@ import { Jua } from 'next/font/google';
 import './globals.css';
 
 import { cn } from '@/lib/utils';
-// import { connectToMongoDB } from '@/shared/database/mongodb/config';
+import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import AuthProvider from '@/shared/components/providers/AuthProvider';
 import QueryProvider from '@/shared/components/providers/QueryProvider';
 import { ORIGIN } from '@/shared/constants/url';
@@ -65,10 +65,12 @@ export default function RootLayout({
     'logo': new URL('/images/favicon.png', ORIGIN),
   };
 
+  connectToMongoDB();
+
   return (
     <html lang="ko">
       <Head>
-        <link rel="icon" href="/images/favicon.png" sizes="any" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <script
           typeof="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
