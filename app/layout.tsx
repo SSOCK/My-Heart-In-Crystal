@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@vercel/analytics/react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import { Jua } from 'next/font/google';
 import './globals.css';
@@ -37,6 +39,8 @@ export default function RootLayout({
         <QueryProvider>
           <AuthProvider>{children}</AuthProvider>
         </QueryProvider>
+        <Analytics />
+        <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_ID || ''} />
       </body>
     </html>
   );
