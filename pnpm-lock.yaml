@@ -89,6 +89,9 @@ importers:
       react-hook-form:
         specifier: ^7.53.0
         version: 7.53.0(react@18.3.1)
+      react-joystick-component:
+        specifier: ^6.2.1
+        version: 6.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6088,6 +6091,12 @@ packages:
 
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+
+  react-joystick-component@6.2.1:
+    resolution: {integrity: sha512-0G5Y5aX4hNuXB3xJCwz6Q+nYQOtC6kprNGKmZxmfoPvhepNYUiid0DbLEGZxmr/UKip3S/LUbcQUobtRCuB8IQ==}
+    peerDependencies:
+      react: '>=17.0.2'
+      react-dom: '>=17.0.2'
 
   react-reconciler@0.27.0:
     resolution: {integrity: sha512-HmMDKciQjYmBRGuuhIaKA1ba/7a+UsM5FzOZsMO2JYHt9Jh8reCb7j1eDC95NOyUlKM9KRyvdx0flBuDvYSBoA==}
@@ -14488,6 +14497,11 @@ snapshots:
   react-is@18.1.0: {}
 
   react-is@18.3.1: {}
+
+  react-joystick-component@6.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   react-reconciler@0.27.0(react@18.3.1):
     dependencies:
