@@ -1,8 +1,9 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-
 import { OrbitControls } from '@react-three/drei';
+// import { Bloom, EffectComposer } from '@react-three/postprocessing';
+
 import MainDecoration from '@/app/(protected)/main/_components/MainDecoration';
 import Bottom from '@/app/(protected)/main/_components/Bottom';
 import Decorations from '@/app/(protected)/main/_components/Decorations';
@@ -52,11 +53,7 @@ const CrystalCanvas = ({
           shadow-camera-top={15}
           shadow-camera-bottom={-15}
         />
-        <directionalLight
-          position={[1, 0, 0]}
-          intensity={1}
-          color={'#ffffff'}
-        />
+
         <Raycaster />
         <Glass />
         {Array.from({ length: 100 }, (_, i) => (
