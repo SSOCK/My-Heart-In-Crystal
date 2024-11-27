@@ -77,3 +77,7 @@ export const DECO_TYPE = {
 export const ETC = {
   NEW: '/assets/etcs/new.glb',
 } as const;
+
+export const ENVIRONMENTS = {
+  MOON: '/assets/environments/moon.glb',
+} as const;

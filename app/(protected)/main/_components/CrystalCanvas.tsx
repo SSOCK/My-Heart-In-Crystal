@@ -2,7 +2,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-// import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 import MainDecoration from '@/app/(protected)/main/_components/MainDecoration';
 import Bottom from '@/app/(protected)/main/_components/Bottom';
@@ -13,6 +13,7 @@ import Base from '@/shared/components/3dModels/Base';
 import Glass from '@/shared/components/3dModels/Glass';
 import Snowflake from '@/shared/components/3dModels/Snowflake';
 import Ground from '@/shared/components/3dModels/Ground';
+import Environment from '@/shared/components/3dModels/Environment';
 
 import { Crystal } from '@/shared/types/crystal';
 
@@ -71,6 +72,15 @@ const CrystalCanvas = ({
           title={data[current].title}
         />
         <Ground />
+        <Environment />
+        <EffectComposer>
+          <Bloom
+            mipmapBlur={true}
+            luminanceThreshold={0.1}
+            luminanceSmoothing={0.9}
+            intensity={0.2}
+          />
+        </EffectComposer>
       </Canvas>
     </section>
   );
