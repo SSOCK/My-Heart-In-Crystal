@@ -6,6 +6,7 @@ import { OrbitControls } from '@react-three/drei';
 import MainDecoration from '@/shared/components/3dModels/MainDecoration';
 import Bottom from '@/shared/components/3dModels/Bottom';
 import Decorations from '@/shared/components/canvas/Decorations';
+import Environment from '@/shared/components/3dModels/Environment';
 
 import Base from '@/shared/components/3dModels/Base';
 import Glass from '@/shared/components/3dModels/Glass';
@@ -13,6 +14,7 @@ import Snowflake from '@/shared/components/3dModels/Snowflake';
 import Ground from '@/shared/components/3dModels/Ground';
 
 import Raycaster from '@/shared/components/canvas/Raycaster';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 const CrystalCanvas = () => {
   return (
@@ -55,6 +57,16 @@ const CrystalCanvas = () => {
         <Base />
         <Bottom />
         <Ground />
+        <Environment />
+
+        <EffectComposer>
+          <Bloom
+            mipmapBlur={true}
+            luminanceThreshold={0.1}
+            luminanceSmoothing={0.9}
+            intensity={0.2}
+          />
+        </EffectComposer>
       </Canvas>
     </section>
   );

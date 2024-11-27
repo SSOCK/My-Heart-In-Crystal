@@ -1,8 +1,9 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-
 import { OrbitControls } from '@react-three/drei';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
+
 import MainDecoration from '@/app/(public)/visit/_components/MainDecoration';
 import Bottom from '@/app/(public)/visit/_components/Bottom';
 import Decorations from '@/app/(public)/visit/_components/Decorations';
@@ -11,7 +12,7 @@ import Base from '@/shared/components/3dModels/Base';
 import Glass from '@/shared/components/3dModels/Glass';
 import Snowflake from '@/shared/components/3dModels/Snowflake';
 import Ground from '@/shared/components/3dModels/Ground';
-
+import Environment from '@/shared/components/3dModels/Environment';
 import Raycaster from '@/shared/components/canvas/Raycaster';
 import { UserData } from '@/shared/types/userData';
 
@@ -63,6 +64,15 @@ const CrystalCanvas = ({
         <Base />
         <Bottom crystal={userData.crystals[current]} />
         <Ground />
+        <Environment />
+        <EffectComposer>
+          <Bloom
+            mipmapBlur={true}
+            luminanceThreshold={0.1}
+            luminanceSmoothing={0.9}
+            intensity={0.2}
+          />
+        </EffectComposer>
       </Canvas>
     </section>
   );
