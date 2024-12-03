@@ -80,4 +80,5 @@ export const ETC = {
 
 export const ENVIRONMENTS = {
   MOON: '/assets/environments/moon.glb',
+  TREE: '/assets/environments/spruce.glb',
 } as const;

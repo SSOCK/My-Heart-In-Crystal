@@ -13,7 +13,7 @@ import Base from '@/shared/components/3dModels/Base';
 import Glass from '@/shared/components/3dModels/Glass';
 import Snowflake from '@/shared/components/3dModels/Snowflake';
 import Ground from '@/shared/components/3dModels/Ground';
-import Environment from '@/shared/components/3dModels/Environment';
+import Environments from '@/shared/components/3dModels/Environment';
 
 import { Crystal } from '@/shared/types/crystal';
 
@@ -41,18 +41,18 @@ const CrystalCanvas = ({
         <ambientLight intensity={1.5} color={'#ffffff'} />
 
         <directionalLight
-          position={[1, 2, 1]}
-          intensity={1.5}
+          position={[30, 30, 10]} // x축을 더 멀리, y축을 더 높게, z축은 중앙으로
+          intensity={1} // 강도를 약간 높임
           color={'#ffffff'}
           castShadow={true}
-          shadow-mapSize-width={2048} // shadow resolution
+          shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
-          shadow-camera-far={50} // default is 50
+          shadow-camera-far={1000} // 더 멀리까지 보이도록
           shadow-camera-near={1}
-          shadow-camera-left={-15}
-          shadow-camera-right={15}
-          shadow-camera-top={15}
-          shadow-camera-bottom={-15}
+          shadow-camera-left={-40}
+          shadow-camera-right={40}
+          shadow-camera-top={40}
+          shadow-camera-bottom={-40}
         />
 
         <Raycaster />
@@ -71,8 +71,8 @@ const CrystalCanvas = ({
           color={data[current].bottom_decoration_color}
           title={data[current].title}
         />
+        <Environments />
         <Ground />
-        <Environment />
         <EffectComposer>
           <Bloom
             mipmapBlur={true}

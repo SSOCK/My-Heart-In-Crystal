@@ -16,7 +16,7 @@ const Ground = () => {
   ground.castShadow = true;
   ground.receiveShadow = true;
   ground.name = 'Ground';
-  console.log(ground.children);
+
   return <primitive object={ground} />;
 };
 
