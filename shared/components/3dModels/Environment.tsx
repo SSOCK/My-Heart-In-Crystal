@@ -2,6 +2,40 @@ import { useGLTF } from '@react-three/drei';
 import { ENVIRONMENTS } from '@/shared/constants/3dModel';
 import { Mesh, MeshStandardMaterial, Vector3 } from 'three';
 
+const House = ({
+  position,
+  rotation,
+}: {
+  position: Vector3;
+  rotation: number;
+}) => {
+  const house = useGLTF(ENVIRONMENTS.HOUSE).scene.clone();
+  house.scale.set(3, 3, 3);
+  house.position.set(position.x, position.y, position.z);
+  house.rotation.set(0, Math.PI + rotation, 0);
+
+  house.traverse((object) => {
+    if (object instanceof Mesh) {
+      object.castShadow = true;
+      object.receiveShadow = true;
+      if (object.material instanceof MeshStandardMaterial) {
+        object.material.emissive.set('#ffffff');
+        object.material.roughness = 1;
+        object.material.metalness = 0;
+        object.material.emissiveIntensity = 0.06;
+      }
+    }
+  });
+
+  const windowLight = house.getObjectByName('WindowsLight') as Mesh | undefined;
+  if (windowLight && windowLight.material instanceof MeshStandardMaterial) {
+    windowLight.material.emissive.set('#ffffff');
+    windowLight.material.emissiveIntensity = 10;
+  }
+
+  return <primitive object={house} />;
+};
+
 const Moon = () => {
   const moon = useGLTF(ENVIRONMENTS.MOON).scene.clone();
 
@@ -53,11 +87,26 @@ const Environments = () => {
     new Vector3(10, -5, -30),
     new Vector3(-5, -5, -35),
   ];
+
+  const housePosition = [
+    new Vector3(-55, -5, 20),
+    new Vector3(-60, -5, -10),
+    new Vector3(-55, -5, -40),
+  ];
+  const houseRotation = [Math.PI / 5, 0, -Math.PI / 3];
+
   return (
     <>
       <Moon />
       {treePositions.map((position, index) => (
         <Tree key={index} position={position} />
+      ))}
+      {housePosition.map((position, index) => (
+        <House
+          key={index}
+          position={position}
+          rotation={houseRotation[index]}
+        />
       ))}
     </>
   );
