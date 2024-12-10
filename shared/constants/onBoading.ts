@@ -72,7 +72,7 @@ export const VISITOR_ONBOARDING_STEPS = [
   },
   {
     target: '.visitor-onboarding-message',
-    content: '이곳을 클릭하여 새로운 메세지를 남겨보세요 !',
+    content: '이 버튼을 클릭해 새로운 메세지를 선물하세요 !',
     disableBeacon: true,
     showBeacon: false,
   },
