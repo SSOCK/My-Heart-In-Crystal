@@ -31,13 +31,18 @@ const CrystalCanvas = ({
   current: number;
 }) => {
   const [run, setRun] = useState(false);
+  const [isLoading, setLoadingDone] = useState(false);
+
+  const loadingDone = () => {
+    setLoadingDone(true);
+  };
 
   useEffect(() => {
     const mainOnboarding = localStorage.getItem('mainOnboarding');
-    if (mainOnboarding !== 'completed') {
+    if (mainOnboarding !== 'completed' && isLoading) {
       setRun(true);
     }
-  }, []);
+  }, [isLoading]);
 
   const handleJoyrideCallback = (data: { status: string; action: string }) => {
     const { status, action } = data;
@@ -59,7 +64,7 @@ const CrystalCanvas = ({
           shadows={true}
           camera={{ position: [16, 0, 0], fov: 100 }}
         >
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<Loading loadingDone={loadingDone} />}>
             <OrbitControls
               target={[0, 0, 0]}
               enablePan={false}
