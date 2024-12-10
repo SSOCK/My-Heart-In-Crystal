@@ -54,7 +54,7 @@ const MakeSection = ({ userData }: { userData: UserType }) => {
   useEffect(() => {
     if (
       userData &&
-      userData.crystal_id.get(CURRENT_YEAR)?.get(CURRENT_SEASON)?.length === 5
+      userData.crystal_id.get(CURRENT_YEAR)[CURRENT_SEASON].length === 5
     )
       router.replace(ROUTES.MAIN);
   }, [router, userData]);

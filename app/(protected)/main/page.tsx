@@ -55,12 +55,10 @@ const MainPage = async () => {
   if (!user) redirect(ROUTES.ERROR);
   if (user.username === null) redirect(ROUTES.NICKNAME);
   else if (
-    !crystal?.[CURRENT_YEAR] ||
-    !crystal[CURRENT_YEAR][CURRENT_SEASON] ||
-    crystal[CURRENT_YEAR][CURRENT_SEASON]?.length === 0
-  ) {
+    crystal === undefined ||
+    crystal.get(CURRENT_YEAR)?.[CURRENT_SEASON] === undefined
+  )
     redirect(ROUTES.MAKE);
-  }
 
   return <Main userData={user} />;
 };

@@ -16,6 +16,8 @@ import { UserData } from '@/shared/types/userData';
 
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/shared/constants/routes';
+import { CURRENT_YEAR } from '@/shared/constants/Date';
+import { CURRENT_SEASON } from '@/shared/constants/Date';
 
 const Visit = ({ userData }: { userData: UserData }) => {
   const router = useRouter();
@@ -49,7 +51,10 @@ const Visit = ({ userData }: { userData: UserData }) => {
           <MessageCount count={userData.crystals[current].message_id.length} />
         </div>
         <ArrowButtons
-          maxIndex={userData.user.crystal_id.length - 1}
+          maxIndex={
+            userData.user.crystal_id.get(CURRENT_YEAR)?.[CURRENT_SEASON]
+              ?.length - 1
+          }
           current={current}
           handleCurrent={setCurrent}
         />
