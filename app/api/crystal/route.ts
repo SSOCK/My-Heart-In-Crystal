@@ -75,10 +75,12 @@ export const POST = async (req: NextRequest) => {
         {
           user_id,
           title,
-          main_decoration_id: model,
+          main_decoration_name: model,
           main_decoration_color: modelColor,
-          bottom_decoration_id: bottom,
+          bottom_decoration_name: bottom,
           bottom_decoration_color: bottomColor,
+          year: CURRENT_YEAR,
+          season: CURRENT_SEASON,
         },
       ],
       { session: sessionDB }
