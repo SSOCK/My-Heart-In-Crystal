@@ -53,6 +53,7 @@ const CrystalCanvas = ({
     <>
       <section className="canvas-3d">
         <Canvas
+          className="main-onboarding-crystal-canvas"
           flat
           linear
           shadows={true}

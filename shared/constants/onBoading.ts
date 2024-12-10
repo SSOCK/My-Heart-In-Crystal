@@ -24,18 +24,19 @@ export const LANDING_ONBOARDING_STEPS = [
 export const MAIN_ONBOARDING_STEPS = [
   {
     target: '.main-onboarding-crystal-canvas',
-    content: '수정 구슬은 총 5개까지 보유할 수 있습니다.',
+    content:
+      '안녕하세요 ! 방문자들이 남긴 메세지는 수정 구슬 안에 장식으로 보관되어요.',
     disableBeacon: true,
     showBeacon: false,
   },
   {
     target: '.main-onboarding-crystal-canvas',
-    content: '방문자들이 남긴 메세지는 이곳에 장식으로 보관되어요.',
+    content: '추가로 수정 구슬은 총 5개까지만 보유할 수 있습니다.',
     disableBeacon: true,
     showBeacon: false,
   },
   {
-    target: '.main-onboarding-showing',
+    target: '.main-onboarding-full-screen',
     content: '이 버튼을 통해 UI를 숨겨 예쁜 수정 구슬을 감상할 수 있어요.',
     disableBeacon: true,
     showBeacon: false,
