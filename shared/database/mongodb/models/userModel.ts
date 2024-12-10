@@ -5,7 +5,14 @@ export interface IUser {
   email: string;
   uuid: string;
   uid: string;
-  crystal_id: mongoose.Schema.Types.ObjectId[] | string[] | [];
+  crystal_id: {
+    [year: string]: {
+      winter?: mongoose.Schema.Types.ObjectId[] | [] | null;
+      spring?: mongoose.Schema.Types.ObjectId[] | [] | null;
+      summer?: mongoose.Schema.Types.ObjectId[] | [] | null;
+      fall?: mongoose.Schema.Types.ObjectId[] | [] | null;
+    };
+  };
   username: string | null;
   provider: string;
 }
@@ -22,7 +29,16 @@ const userSchema = new mongoose.Schema<IUserDocument>(
     email: { type: String, required: true },
     uid: { type: String, required: true },
     uuid: { type: String, required: true },
-    crystal_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Crystal' }],
+    crystal_id: {
+      type: Map,
+      of: {
+        winter: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Crystal' }],
+        spring: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Crystal' }],
+        summer: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Crystal' }],
+        fall: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Crystal' }],
+      },
+      default: {},
+    },
     username: { type: String, default: null },
     provider: { type: String, required: true },
   },

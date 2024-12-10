@@ -8,6 +8,7 @@ import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User, { IUser } from '@/shared/database/mongodb/models/userModel';
 import { sessionUser, User as UserType } from '@/shared/types/user';
 import { createUser } from '@/shared/database/mongodb/actions/userAction';
+import { CURRENT_YEAR, CURRENT_SEASON } from '@/shared/constants/Date';
 
 import Main from '@/app/(protected)/main/_components/Main';
 
@@ -33,13 +34,13 @@ const getUserData = async () => {
     const initUser: IUser = {
       email: user.email,
       uid: user.uid,
-      crystal_id: [],
+      crystal_id: {},
       uuid,
       username: null,
       provider: user.provider,
     };
 
-    const newUser = (await createUser(initUser)) as UserType;
+    const newUser = (await createUser(initUser)).toObject() as UserType;
 
     return newUser;
   } catch (error) {
@@ -50,12 +51,17 @@ const getUserData = async () => {
 
 const MainPage = async () => {
   const user = (await getUserData()) as UserType;
-  user._id = String(user._id);
-  user.crystal_id = user.crystal_id.map((id) => id.toString());
 
   if (!user) redirect(ROUTES.ERROR);
   if (user.username === null) redirect(ROUTES.NICKNAME);
-  else if (user.crystal_id === undefined || user.crystal_id.length === 0) {
+  else if (
+    user.crystal_id === undefined ||
+    user.crystal_id[CURRENT_YEAR] === undefined ||
+    user.crystal_id[CURRENT_YEAR][CURRENT_SEASON] === undefined ||
+    user.crystal_id[CURRENT_YEAR][CURRENT_SEASON] === null ||
+    user.crystal_id[CURRENT_YEAR][CURRENT_SEASON].length === undefined ||
+    user.crystal_id[CURRENT_YEAR][CURRENT_SEASON].length === 0
+  ) {
     redirect(ROUTES.MAKE);
   }
 
