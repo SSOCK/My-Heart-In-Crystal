@@ -6,6 +6,8 @@ import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User from '@/shared/database/mongodb/models/userModel';
 import { redirect } from 'next/navigation';
 import { User as UserType } from '@/shared/types/user';
+import { CURRENT_SEASON } from '@/shared/constants/Date';
+import { CURRENT_YEAR } from '@/shared/constants/Date';
 
 const getCrystalData = async (userId: string, crystalIndex: string) => {
   const idx = parseInt(crystalIndex);
@@ -19,11 +21,13 @@ const getCrystalData = async (userId: string, crystalIndex: string) => {
       })
     )?.toObject() as UserType;
     if (!user) return null;
-    user._id = user._id.toString();
-    const crystalId = user.crystal_id[idx].toString();
-    if (!crystalId) return null;
 
-    return { id: user._id, crystalId };
+    return {
+      id: user._id,
+      crystalId: user.crystal_id
+        .get(CURRENT_YEAR)
+        ?.[CURRENT_SEASON][idx].toString(),
+    };
   } catch (error) {
     console.error(error);
     return null;

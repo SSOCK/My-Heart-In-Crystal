@@ -47,6 +47,7 @@ export const generateMetadata = async (
 
 const VisitPage = async ({ params }: { params: { userId: string } }) => {
   const data = await getVisitUserData(params.userId);
+  console.log(data);
   if (!data) redirect(ROUTES.LANDING);
 
   return (
