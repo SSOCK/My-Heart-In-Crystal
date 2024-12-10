@@ -5,7 +5,7 @@ import { ROUTES } from '@/shared/constants/routes';
 
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User, { IUser } from '@/shared/database/mongodb/models/userModel';
-import { sessionUser, UserType } from '@/shared/types/user';
+import { sessionUser } from '@/shared/types/user';
 import { createUser } from '@/shared/database/mongodb/actions/userAction';
 import { CURRENT_YEAR, CURRENT_SEASON } from '@/shared/constants/Date';
 
@@ -39,7 +39,7 @@ const getUserData = async () => {
       provider: user.provider,
     };
 
-    const newUser = (await createUser(initUser)).toObject() as UserType;
+    const newUser = await createUser(initUser);
 
     return newUser;
   } catch (error) {
@@ -49,16 +49,15 @@ const getUserData = async () => {
 };
 
 const MainPage = async () => {
-  const user = (await getUserData()) as UserType;
+  const user = await getUserData();
+  const crystal = user?.crystal_id;
 
   if (!user) redirect(ROUTES.ERROR);
   if (user.username === null) redirect(ROUTES.NICKNAME);
   else if (
-    user.crystal_id === undefined ||
-    user.crystal_id.get(CURRENT_YEAR) === undefined ||
-    user.crystal_id.get(CURRENT_YEAR)?.get(CURRENT_SEASON) === undefined ||
-    user.crystal_id.get(CURRENT_YEAR)?.get(CURRENT_SEASON) === null ||
-    user.crystal_id.get(CURRENT_YEAR)?.get(CURRENT_SEASON)?.length === 0
+    !crystal?.[CURRENT_YEAR] ||
+    !crystal[CURRENT_YEAR][CURRENT_SEASON] ||
+    crystal[CURRENT_YEAR][CURRENT_SEASON]?.length === 0
   ) {
     redirect(ROUTES.MAKE);
   }
