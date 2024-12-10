@@ -26,7 +26,7 @@ const Main = ({ userData }: { userData: User }) => {
   const { resetModel } = use3DModel();
 
   const { data, isLoading, isError } = useQuery<Crystal[]>({
-    queryKey: ['crystal'],
+    queryKey: ['crystal', userData._id],
     queryFn: () => fetchCrystal(userData._id),
     gcTime: 0,
   });
