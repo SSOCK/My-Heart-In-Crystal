@@ -7,10 +7,10 @@ export interface IUser {
   uid: string;
   crystal_id: {
     [year: string]: {
-      winter?: mongoose.Schema.Types.ObjectId[] | [] | null;
-      spring?: mongoose.Schema.Types.ObjectId[] | [] | null;
-      summer?: mongoose.Schema.Types.ObjectId[] | [] | null;
-      fall?: mongoose.Schema.Types.ObjectId[] | [] | null;
+      winter?: mongoose.Schema.Types.ObjectId[];
+      spring?: mongoose.Schema.Types.ObjectId[];
+      summer?: mongoose.Schema.Types.ObjectId[];
+      fall?: mongoose.Schema.Types.ObjectId[];
     };
   };
   username: string | null;
