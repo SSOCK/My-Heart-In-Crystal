@@ -10,9 +10,11 @@ import DecoDrawer from '@/app/(protected)/make/_components/DecoDrawer';
 
 import UISection from '@/shared/components/ui/UISection';
 import { ROUTES } from '@/shared/constants/routes';
-import { User } from '@/shared/types/user';
+import { UserType } from '@/shared/types/user';
+import { CURRENT_SEASON } from '@/shared/constants/Date';
+import { CURRENT_YEAR } from '@/shared/constants/Date';
 
-const MakeSection = ({ userData }: { userData: User }) => {
+const MakeSection = ({ userData }: { userData: UserType }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const STEP_MESSAGE = [
@@ -50,7 +52,10 @@ const MakeSection = ({ userData }: { userData: User }) => {
   }, [searchParams, router]);
 
   useEffect(() => {
-    if (userData && userData.crystal_id.length === 5)
+    if (
+      userData &&
+      userData.crystal_id.get(CURRENT_YEAR)?.get(CURRENT_SEASON)?.length === 5
+    )
       router.replace(ROUTES.MAIN);
   }, [router, userData]);
 

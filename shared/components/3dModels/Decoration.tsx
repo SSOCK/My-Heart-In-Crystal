@@ -30,7 +30,7 @@ const Decoration = ({
   scale,
   position,
   message,
-  id,
+  name,
   color,
   sender,
   letterID,
@@ -40,7 +40,9 @@ const Decoration = ({
 }: DecoProps) => {
   const decorations = Object.values(DECO);
 
-  const deco = useGLTF(decorations[id - 1].fileName).scene.clone();
+  const deco = useGLTF(
+    decorations.find((deco) => deco.name === name)!.fileName
+  ).scene.clone();
   const target = { x: 8, z: 0 };
   const focus = Math.atan2(position.z - target.z, position.x - target.x);
 
