@@ -11,25 +11,26 @@ export const BOTTOM = {
 } as const;
 
 export const DECO = {
+  LUCKY_CAT: { name: 'luckyCat', path: '/assets/models/luckyCat.glb' },
   PRESENT: {
     name: 'giftBox',
-    fileName: '/assets/models/ribbonBox.glb',
+    path: '/assets/models/ribbonBox.glb',
   },
   FISHBREAD: {
     name: 'fishBread',
-    fileName: '/assets/models/fishBread.glb',
+    path: '/assets/models/fishBread.glb',
   },
   GINGERBREAD: {
     name: 'gingerBread',
-    fileName: '/assets/models/gingerBread.glb',
+    path: '/assets/models/gingerBread.glb',
   },
-  CHEST: { name: 'chest', fileName: '/assets/models/chest.glb' },
-  DDONG: { name: 'poop', fileName: '/assets/models/ddong.glb' },
+  CHEST: { name: 'chest', path: '/assets/models/chest.glb' },
+  DDONG: { name: 'poop', path: '/assets/models/ddong.glb' },
   MINISNOWMAN: {
     name: 'miniSnowMan',
-    fileName: '/assets/models/miniSnowMan.glb',
+    path: '/assets/models/miniSnowMan.glb',
   },
-  SOCKS: { name: 'socks', fileName: '/assets/models/socks.glb' },
+  SOCKS: { name: 'socks', path: '/assets/models/socks.glb' },
 } as const;
 
 export const SENTIMENT = {
