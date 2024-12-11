@@ -57,6 +57,18 @@ const MainPage = async () => {
     crystal.get(CURRENT_YEAR)?.[CURRENT_SEASON] === undefined
   )
     redirect(ROUTES.MAKE);
+  user._id = user._id.toString();
+
+  const currentYearMap = user.crystal_id?.get(CURRENT_YEAR);
+
+  const currentSeason = currentYearMap?.[CURRENT_SEASON]?.map((item) =>
+    item.toString()
+  );
+  const newMap = new Map();
+  newMap.set(CURRENT_YEAR, {
+    [CURRENT_SEASON]: currentSeason,
+  });
+  user.crystal_id = newMap;
 
   return <Main userData={user} />;
 };
