@@ -72,7 +72,7 @@ export const messageLists: Message[] = [
       '친구야,\n 내가 갖고 있는 최고의 선물은 너와 함께 있는 시간이에요.\n 이번 크리스마스를 잊지 못할 거에요. 🎄🕰️',
     sendAt: '2024-12-25 10:11',
     decoration_color: '#00ea00',
-    decoration_name: 'giftBox',
+    decoration_name: 'milkCookie',
     id: 5,
     is_deleted: false,
     letter_id: 5,
