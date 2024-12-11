@@ -219,7 +219,7 @@ export const messageLists: Message[] = [
     content: '2025년 정말 설레ㅎㅎㅎㅎ\n또 어떤 좋은 일들이 기다리고 있을까?❤️',
     sendAt: '2024-12-25 10:11',
     decoration_color: '#530fa0',
-    decoration_name: 'giftBox',
+    decoration_name: 'santaCat',
     id: 14,
     is_deleted: false,
     letter_id: 1,
