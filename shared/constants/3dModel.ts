@@ -53,7 +53,7 @@ export const MAIN_DECORATION = {
     name: 'glassesDuck',
     path: '/assets/sprites/bcduck_glasses.glb',
   },
-  SANTACLAUS: { name: 'santa', path: '/assets/sprites/santa.glb' },
+  SANTACLAUS: { name: 'santaclaus', path: '/assets/sprites/santaclaus.glb' },
   SNOWMAN: { name: 'snowMan', path: '/assets/sprites/snowman.glb' },
   TREE: { name: 'tree', path: '/assets/sprites/tree.glb' },
   TUX: { name: 'tux', path: '/assets/sprites/tux.glb' },
