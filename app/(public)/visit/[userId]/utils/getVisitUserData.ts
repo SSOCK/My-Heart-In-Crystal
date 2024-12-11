@@ -14,28 +14,23 @@ const getVisitUserData = async (userId: string) => {
 
     const user = (await User.findOne({ uuid: userId }))?.toObject() as UserType;
     if (!user) return null;
-    if (
-      (user &&
-        user.crystal_id.get(CURRENT_YEAR)?.[CURRENT_SEASON]?.length === 0) ||
-      user.username === null
-    )
-      return null;
+    const crystalId = user.crystal_id?.get(CURRENT_YEAR)?.[CURRENT_SEASON];
+    if (!crystalId) return null;
+    if (user.username === null || crystalId.length === 0) return null;
 
     const crystals = await Promise.all(
-      user.crystal_id
-        .get(CURRENT_YEAR)
-        ?.[CURRENT_SEASON].map(async (crystalId) => {
-          const crystalData = (
-            await Crystal.findOne({ _id: crystalId })
-          )?.toObject() as CrystalType;
-          crystalData._id = crystalData._id.toString();
-          crystalData.user_id = crystalData.user_id.toString();
-          crystalData.message_id = crystalData.message_id.map((messageId) =>
-            messageId.toString()
-          );
-          if (!crystalData) throw new Error('No crystal data');
-          return crystalData;
-        })
+      crystalId.map(async (crystalId) => {
+        const crystalData = (
+          await Crystal.findOne({ _id: crystalId })
+        )?.toObject() as CrystalType;
+        crystalData._id = crystalData._id.toString();
+        crystalData.user_id = crystalData.user_id.toString();
+        crystalData.message_id = crystalData.message_id.map((messageId) =>
+          messageId.toString()
+        );
+        if (!crystalData) throw new Error('No crystal data');
+        return crystalData;
+      })
     );
 
     const crystalWithMessages = await Promise.all(

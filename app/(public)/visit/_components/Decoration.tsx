@@ -7,7 +7,7 @@ import { DECO, ETC } from '@/shared/constants/3dModel';
 import { formattedTime } from '@/shared/utils/time/formattedTime';
 
 interface DecoProps {
-  id: number;
+  name: string;
   scale: number;
   position: Vector3;
   message: string;

@@ -1,18 +1,19 @@
 import mongoose, { Document, Model } from 'mongoose';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 
+type SeasonType = 'spring' | 'summer' | 'fall' | 'winter';
+
+type CrystalSeasonMap = {
+  [key in SeasonType]: mongoose.Schema.Types.ObjectId[] | undefined;
+};
+
+type CrystalYearMap = Map<string, CrystalSeasonMap>;
+
 export interface IUser {
   email: string;
   uuid: string;
   uid: string;
-  crystal_id: {
-    [year: string]: {
-      winter?: mongoose.Schema.Types.ObjectId[];
-      spring?: mongoose.Schema.Types.ObjectId[];
-      summer?: mongoose.Schema.Types.ObjectId[];
-      fall?: mongoose.Schema.Types.ObjectId[];
-    };
-  };
+  crystal_id: CrystalYearMap | undefined;
   username: string | null;
   provider: string;
 }

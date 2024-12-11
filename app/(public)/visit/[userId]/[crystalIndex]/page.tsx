@@ -1,5 +1,3 @@
-import mongoose from 'mongoose';
-
 import VisitMake from '@/app/(public)/visit/[userId]/_components';
 import { ROUTES } from '@/shared/constants/routes';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
@@ -21,12 +19,14 @@ const getCrystalData = async (userId: string, crystalIndex: string) => {
       })
     )?.toObject() as UserType;
     if (!user) return null;
+    const crystalId = user.crystal_id
+      ?.get(CURRENT_YEAR)
+      ?.[CURRENT_SEASON]?.[idx].toString();
+    if (!crystalId) return null;
 
     return {
       id: user._id,
-      crystalId: user.crystal_id
-        .get(CURRENT_YEAR)
-        ?.[CURRENT_SEASON][idx].toString(),
+      crystalId,
     };
   } catch (error) {
     console.error(error);
@@ -39,17 +39,16 @@ const VisitMakePage = async ({
 }: {
   params: { userId: string; crystalIndex: string };
 }) => {
-  const { id, crystalId }: any = await getCrystalData(
-    params.userId,
-    params.crystalIndex
-  );
-  if (!crystalId) redirect(ROUTES.LANDING);
+  const idData = await getCrystalData(params.userId, params.crystalIndex);
+  if (!idData) redirect(ROUTES.LANDING);
+
+  const { id, crystalId } = idData;
 
   return (
     <VisitMake
       userId={id}
       uuid={params.userId}
-      crystalId={crystalId as mongoose.Schema.Types.ObjectId}
+      crystalId={crystalId}
       index={params.crystalIndex}
     />
   );

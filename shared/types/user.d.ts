@@ -1,12 +1,4 @@
 import { IUser } from '@/shared/database/mongodb/models/userModel';
-import mongoose from 'mongoose';
-
-type SeasonType = 'spring' | 'summer' | 'fall' | 'winter';
-type CrystalSeasonMap = Map<
-  SeasonType,
-  mongoose.Schema.Types.ObjectId[] | undefined
->;
-type CrystalYearMap = Map<string, CrystalSeasonMap>;
 
 export type User = {
   createdAt: string;
@@ -21,7 +13,6 @@ export type sessionUser = {
 };
 
 export type UserType = {
-  crystal_id: CrystalYearMap;
   createdAt: string;
   updatedAt: string;
   _id: string;

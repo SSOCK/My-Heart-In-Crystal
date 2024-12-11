@@ -5,13 +5,13 @@ import { ROUTES } from '@/shared/constants/routes';
 
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User, { IUser } from '@/shared/database/mongodb/models/userModel';
-import { sessionUser } from '@/shared/types/user';
+import { sessionUser, UserType } from '@/shared/types/user';
 import { createUser } from '@/shared/database/mongodb/actions/userAction';
 import { CURRENT_YEAR, CURRENT_SEASON } from '@/shared/constants/Date';
 
 import Main from '@/app/(protected)/main/_components/Main';
 
-const getUserData = async () => {
+const getUserData = async (): Promise<UserType | null> => {
   const session = await auth();
 
   if (!session) redirect(ROUTES.LANDING);
@@ -20,20 +20,18 @@ const getUserData = async () => {
     const user = session.user as sessionUser;
     await connectToMongoDB();
 
-    const existingUser = (
-      await User.findOne({
-        email: user.email,
-        provider: user.provider,
-      })
-    )?.toObject();
+    const existingUser = await User.findOne({
+      email: user.email,
+      provider: user.provider,
+    });
 
-    if (existingUser) return existingUser;
+    if (existingUser) return existingUser.toObject() as UserType;
 
     const uuid = uuidv4();
     const initUser: IUser = {
       email: user.email,
       uid: user.uid,
-      crystal_id: {},
+      crystal_id: undefined,
       uuid,
       username: null,
       provider: user.provider,
@@ -41,7 +39,7 @@ const getUserData = async () => {
 
     const newUser = await createUser(initUser);
 
-    return newUser;
+    return newUser as UserType;
   } catch (error) {
     console.error('Failed to create user', error);
     return null;
