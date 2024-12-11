@@ -13,6 +13,7 @@ export const BOTTOM = {
 export const DECO = {
   LUCKY_CAT: { name: 'luckyCat', path: '/assets/models/luckyCat.glb' },
   MILK_COOKIE: { name: 'milkCookie', path: '/assets/models/milkCookie.glb' },
+  MINI_SANTA: { name: 'miniSanta', path: '/assets/models/miniSanta.glb' },
   PRESENT: {
     name: 'giftBox',
     path: '/assets/models/ribbonBox.glb',

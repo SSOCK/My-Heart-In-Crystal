@@ -170,7 +170,7 @@ export const messageLists: Message[] = [
     content: '내년에도 올해처럼 행복하게 흐르기를 바라🎄',
     sendAt: '2024-12-25 10:11',
     decoration_color: '#65b182',
-    decoration_name: 'giftBox',
+    decoration_name: 'miniSanta',
     id: 11,
     is_deleted: false,
     letter_id: 1,
