@@ -145,9 +145,7 @@ export const GET = async (req: NextRequest) => {
     // user_id에 해당하는 유저의 crystal_id 조회
     const crystal = (
       (await User.findOne({ _id: userId }).select('crystal_id')) as UserType
-    ).crystal_id
-      .get(CURRENT_YEAR)
-      ?.get(CURRENT_SEASON);
+    ).crystal_id?.get(CURRENT_YEAR)?.[CURRENT_SEASON];
 
     if (!crystal) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });

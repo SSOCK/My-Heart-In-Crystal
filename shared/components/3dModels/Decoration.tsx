@@ -7,7 +7,7 @@ import { DECO } from '@/shared/constants/3dModel';
 import { MSG_COLOR } from '@/shared/constants/modal';
 
 interface DecoProps {
-  id: number;
+  name: string;
   scale: number;
   position: Vector3;
   message: string;
@@ -46,7 +46,7 @@ const Decoration = ({
   const target = { x: 8, z: 0 };
   const focus = Math.atan2(position.z - target.z, position.x - target.x);
 
-  deco.name = decorations[id].name;
+  deco.name = name;
   deco.scale.set(scale, scale, scale);
   deco.position.set(position.x, position.y, position.z);
   if (!isOpened) {
