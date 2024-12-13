@@ -17,8 +17,8 @@ import Environments from '@/shared/components/3dModels/Environment';
 import Raycaster from '@/shared/components/canvas/Raycaster';
 import Loading from '@/shared/components/canvas/Loading';
 import CustomTooltip from '@/shared/components/ui/CustomTooltip';
-import { UserData } from '@/shared/types/userData';
 import { VISITOR_ONBOARDING_STEPS } from '@/shared/constants/onBoading';
+import { Crystal } from '@/shared/types/crystal';
 
 const JoyRide = dynamic(() => import('react-joyride'), { ssr: false });
 
@@ -29,13 +29,8 @@ const MemoizedEnvironments = memo(Environments);
 const MemoizedMainDecoration = memo(MainDecoration);
 const MemoizedDecorations = memo(Decorations);
 const MemoizedBottom = memo(Bottom);
-const CrystalCanvas = ({
-  userData,
-  current,
-}: {
-  userData: UserData;
-  current: number;
-}) => {
+
+const CrystalCanvas = ({ userData }: { userData: Crystal }) => {
   const [run, setRun] = useState(false);
   const [isLoading, setLoadingDone] = useState(false);
 
@@ -102,12 +97,17 @@ const CrystalCanvas = ({
             <Raycaster />
             <MemoizedGlass />
             {snowflakes}
-            <MemoizedDecorations
-              messages={userData.crystals[current].messages}
+            <MemoizedDecorations crystal={userData._id} />
+            <MemoizedMainDecoration
+              name={userData.main_decoration_name}
+              color={userData.main_decoration_color}
             />
-            <MemoizedMainDecoration crystal={userData.crystals[current]} />
             <MemoizedBase />
-            <MemoizedBottom crystal={userData.crystals[current]} />
+            <MemoizedBottom
+              name={userData.bottom_decoration_name}
+              color={userData.bottom_decoration_color}
+              title={userData.title}
+            />
             <MemoizedGround />
             <MemoizedEnvironments />
           </Suspense>
