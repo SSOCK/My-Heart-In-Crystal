@@ -24,11 +24,8 @@ import { BACKEND_ROUTES } from '@/shared/constants/routes';
 import { transKoreaTime } from '@/shared/utils/time/transKoreaTime';
 import { toast } from 'sonner';
 
-import { useMessage } from '@/app/(protected)/main/_store/useMessage';
-
 const MessageListModal = () => {
   const { isOpen, onClose, type, props } = useModal();
-  const { setMessages, messages } = useMessage();
 
   const queryClient = useQueryClient();
 
@@ -51,12 +48,19 @@ const MessageListModal = () => {
 
       if (response.ok) {
         toast.success('메세지가 삭제되었습니다.');
-        queryClient.invalidateQueries({ queryKey: ['crystal'] });
 
-        const newMessages = messages.filter(
-          (message) => message._id !== messageId
-        );
-        setMessages(newMessages);
+        const crystalId = messageLists.find(
+          (message) => message._id === messageId
+        )?.crystal_id;
+        const userId = messageLists.find(
+          (message) => message._id === messageId
+        )?.user_id;
+        queryClient.invalidateQueries({
+          queryKey: ['messages', crystalId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ['crystal', userId],
+        });
       }
     } catch (error) {
       console.error('Error deleting message : ', error);

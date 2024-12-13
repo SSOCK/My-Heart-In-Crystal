@@ -28,6 +28,7 @@ const MemoizedGround = memo(Ground);
 const MemoizedEnvironments = memo(Environments);
 const MemoizedMainDecoration = memo(MainDecoration);
 const MemoizedDecorations = memo(Decorations);
+const MemoizedBottom = memo(Bottom);
 
 const CrystalCanvas = ({
   data,
@@ -108,7 +109,7 @@ const CrystalCanvas = ({
               color={data[current].main_decoration_color}
             />
             <MemoizedBase />
-            <Bottom
+            <MemoizedBottom
               name={data[current].bottom_decoration_name}
               color={data[current].bottom_decoration_color}
               title={data[current].title}
