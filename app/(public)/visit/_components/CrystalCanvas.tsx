@@ -1,10 +1,9 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, memo, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 import MainDecoration from '@/app/(public)/visit/_components/MainDecoration';
 import Bottom from '@/app/(public)/visit/_components/Bottom';
@@ -23,6 +22,13 @@ import { VISITOR_ONBOARDING_STEPS } from '@/shared/constants/onBoading';
 
 const JoyRide = dynamic(() => import('react-joyride'), { ssr: false });
 
+const MemoizedGlass = memo(Glass);
+const MemoizedBase = memo(Base);
+const MemoizedGround = memo(Ground);
+const MemoizedEnvironments = memo(Environments);
+const MemoizedMainDecoration = memo(MainDecoration);
+const MemoizedDecorations = memo(Decorations);
+const MemoizedBottom = memo(Bottom);
 const CrystalCanvas = ({
   userData,
   current,
@@ -36,6 +42,11 @@ const CrystalCanvas = ({
   const loadingDone = () => {
     setLoadingDone(true);
   };
+
+  const snowflakes = useMemo(
+    () => Array.from({ length: 100 }, (_, i) => <Snowflake key={i} />),
+    []
+  );
 
   useEffect(() => {
     const visitOnboarding = localStorage.getItem('visitOnboarding');
@@ -89,24 +100,16 @@ const CrystalCanvas = ({
             />
 
             <Raycaster />
-            <Glass />
-            {Array.from({ length: 100 }, (_, i) => (
-              <Snowflake key={i} />
-            ))}
-            <Decorations messages={userData.crystals[current].messages} />
-            <MainDecoration crystal={userData.crystals[current]} />
-            <Base />
-            <Bottom crystal={userData.crystals[current]} />
-            <Ground />
-            <Environments />
-            <EffectComposer>
-              <Bloom
-                mipmapBlur={true}
-                luminanceThreshold={0.1}
-                luminanceSmoothing={0.9}
-                intensity={0.2}
-              />
-            </EffectComposer>
+            <MemoizedGlass />
+            {snowflakes}
+            <MemoizedDecorations
+              messages={userData.crystals[current].messages}
+            />
+            <MemoizedMainDecoration crystal={userData.crystals[current]} />
+            <MemoizedBase />
+            <MemoizedBottom crystal={userData.crystals[current]} />
+            <MemoizedGround />
+            <MemoizedEnvironments />
           </Suspense>
         </Canvas>
       </section>

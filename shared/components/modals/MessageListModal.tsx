@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 
 import {
@@ -30,7 +29,7 @@ import { useMessage } from '@/app/(protected)/main/_store/useMessage';
 const MessageListModal = () => {
   const { isOpen, onClose, type, props } = useModal();
   const { setMessages, messages } = useMessage();
-  const router = useRouter();
+
   const queryClient = useQueryClient();
 
   if (!isOpen || type !== MODAL_TYPE.ALL_MESSAGE) {
@@ -58,7 +57,6 @@ const MessageListModal = () => {
           (message) => message._id !== messageId
         );
         setMessages(newMessages);
-        router.refresh();
       }
     } catch (error) {
       console.error('Error deleting message : ', error);
